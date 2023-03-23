@@ -14,24 +14,11 @@ public class GameHub {
 
     //----------------------------------------------------------------------
 
-    //Constructors
-
-    //Empty constructor
-    public GameHub() {
-        loadEverything();
-    }
-
-    //----------------------------------------------------------------------
-
-    //Setters and Getters
-
-    //----------------------------------------------------------------------
-
     //Functions
 
     //Function to start app
     public void start() {
-
+        loadEverything();
     }
 
     //Setting objects

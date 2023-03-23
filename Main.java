@@ -6,10 +6,8 @@ public class Main {
 
     //MAIN
     public static void main(String[] args) {
-
         GameHub gameHub = new GameHub();
         gameHub.start();
-        
     }
     
 }

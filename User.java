@@ -88,6 +88,6 @@ public class User {
     }
 
     public boolean isUserType(UserType type) {
-        return getType() == type;
+        return getType().equals(type);
     }
 }

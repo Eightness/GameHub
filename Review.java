@@ -90,4 +90,30 @@ public class Review {
         System.out.println("Fecha de publicación: " + getDate());
         System.out.println();
     }
+
+    public void editReview(String title, String body, int rating) {
+        setTitle(title);
+        setBody(body);
+        setRating(rating);
+    }
+
+    public boolean isRating(int rating) {
+        return getRating() >= rating;
+    }
+
+    public boolean isDate(String date) {
+        return getDate().contains(date);
+    }
+
+    public boolean hasPlayedHours(Double playedHours) {
+        return getPlayedHours() >= playedHours;
+    }
+
+    public boolean isVideogame(Videogame videogame) {
+        return getVideogame().equals(videogame);
+    }
+
+    public boolean isUser(User user) {
+        return getUser().equals(user);
+    }
 }

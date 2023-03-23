@@ -5,9 +5,13 @@
 public class Videogame {
 
     //Enums
-    public enum Platform {PLAYSTATION, XBOX, NINTENDO, PC};
+    public enum Platform {
+        PLAYSTATION, XBOX, NINTENDO, PC
+    }
 
-    public enum Genre {ACTION, ADVENTURE, ROLEPLAYING, STRATEGY, SIMULATION, PUZZLE, OTHER};
+    public enum Genre {
+        ACTION, ADVENTURE, ROLEPLAYING, STRATEGY, SIMULATION, PUZZLE, OTHER
+    }
     
     //Class attributes
     private String name;

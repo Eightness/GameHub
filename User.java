@@ -4,6 +4,8 @@
 //Class done by Marrahy
 public class User {
 
+    //Enum
+
     //Class attributes
 
     //----------------------------------------------------------------------

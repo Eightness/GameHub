@@ -1,6 +1,8 @@
 //Albert Lozano y Sergi Marrahy 
 //1 DAM - Programación
 
+import java.time.LocalDate;
+
 //Class done by Albert
 public class ReviewManager {
 
@@ -97,9 +99,9 @@ public class ReviewManager {
     }
 
     //Shows reviews that have the same date (or shorter) as the parameter
-    public void filterByDate(String date) {
+    public void filterByDate(LocalDate currentDate) {
         for (int i = 0; i < numReviews; i++) {
-            if (reviews[i].isDate(date)) {
+            if (reviews[i].isCurrentDate(currentDate)) {
                 System.out.println("Reseña " + (i + 1) + ":");
                 reviews[i].showReview();
             }
@@ -107,7 +109,7 @@ public class ReviewManager {
     }
 
     //Shows reviews that have the same played hours (or more) as the parameter
-    public void filterByPlayedHours(Double playedHours) {
+    public void filterByPlayedHours(double playedHours) {
         for (int i = 0; i < numReviews; i++) {
             if (reviews[i].hasPlayedHours(playedHours)) {
                 System.out.println("Reseña " + (i + 1) + ":");

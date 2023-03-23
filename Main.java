@@ -9,5 +9,4 @@ public class Main {
         GameHub gameHub = new GameHub();
         gameHub.start();
     }
-    
 }

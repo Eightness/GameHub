@@ -3,7 +3,7 @@
 
 import java.util.Scanner;
 
-//Class done by both
+//Team class
 public class GameHub {
 
     //Class attributes
@@ -11,7 +11,7 @@ public class GameHub {
     private VideogameManager videogameManager;
     private ReviewManager reviewManager;
     Scanner input = new Scanner(System.in);
-
+    
     //----------------------------------------------------------------------
 
     //Functions
@@ -71,12 +71,19 @@ public class GameHub {
 
     //Sign in - Register menu
     private void showLogInMenu() {
-
+        System.out.println();
+        System.out.println("1. Iniciar sesión.");
+        System.out.println("2. Registrarse.");
+        System.out.println("3. Salir.");
+        System.out.println();
     }
 
     //User menu
     private void showUserMenu() {
-
+        System.out.println();
+        System.out.println("1. Publicar reseña.");
+        System.out.println("2. Edita.");
+        System.out.println();
     }
 
     //Mod menu

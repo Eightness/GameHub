@@ -1,16 +1,19 @@
-
 //Albert Lozano y Sergi Marrahy 
 //1 DAM - Programación
+
+import java.time.LocalDate;
 
 //Class done by Marrahy
 public class Review {
 
     //Class attributes
-    String title, body, date;
+    String title, body;
     int rating;
     double playedHours;
     Videogame videogame;
     User user;
+    LocalDate currentDate;
+    
     //----------------------------------------------------------------------
 
     //Void constructor
@@ -19,11 +22,11 @@ public class Review {
     }
 
     //Constructor
-    public Review(String title, String body, int rating, String date, Double playedHours, Videogame videogame, User user) {
+    public Review(String title, String body, int rating, double playedHours, Videogame videogame, User user) {
         setTitle(title);
         setBody(body);
         setRating(rating);
-        setDate(date);
+        setCurrentDate();
         setPlayedHours(playedHours);
         setVideogame(videogame);
         setUser(user);
@@ -41,8 +44,8 @@ public class Review {
     public void setRating(int rating) {
         this.rating = rating;
     }
-    public void setDate(String date) {
-        this.date = date;
+    public void setCurrentDate() {
+        this.currentDate = LocalDate.now();
     }
     public void setPlayedHours(double playedHours) {
         this.playedHours = playedHours;
@@ -64,8 +67,8 @@ public class Review {
     public int getRating() {
         return rating;
     }
-    public String getDate() {
-        return date;
+    public LocalDate getCurrentDate() {
+        return currentDate;
     }
     public double getPlayedHours() {
         return playedHours;
@@ -87,7 +90,7 @@ public class Review {
         System.out.println("Usuario: " + getUser());
         System.out.println("Videojuego: " + getVideogame());
         System.out.println("Horas jugadas: " + getPlayedHours());
-        System.out.println("Fecha de publicación: " + getDate());
+        System.out.println("Fecha de publicación: " + getCurrentDate());
         System.out.println();
     }
 
@@ -101,11 +104,11 @@ public class Review {
         return getRating() >= rating;
     }
 
-    public boolean isDate(String date) {
-        return getDate().contains(date);
+    public boolean isCurrentDate(LocalDate currentDate) {
+        return getCurrentDate().equals(currentDate);
     }
 
-    public boolean hasPlayedHours(Double playedHours) {
+    public boolean hasPlayedHours(double playedHours) {
         return getPlayedHours() >= playedHours;
     }
 

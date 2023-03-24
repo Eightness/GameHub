@@ -26,12 +26,31 @@ public class GameHub {
 
     //Setting a User
     private User setUser() {
-        User user = new User();
+        System.out.print("Introduce nombre: ");
+        String name = input.nextLine();
+        System.out.print("Introduce apodo: ");
+        String username = input.nextLine();
+        System.out.print("Introduce correo: ");
+        String mail = input.nextLine();
+        System.out.print("Introduce contraseña: ");
+        String password = input.nextLine();
+        User user = new User(name, username, mail, password);
         return user;
     }
 
     //Setting a Videogame
     private Videogame setVideogame() {
+        System.out.print("Introduce nombre: ");
+        String name = input.nextLine();
+
+        System.out.print("¿En cuántas plataformas está disponible el juego? ");
+        int numPlatforms = input.nextInt();
+        for (int i = 0; i < numPlatforms; i++) {
+            System.out.println("Introduce plataforma " + (i + 1) + ": ");
+            System.out.println("1. PLAYSTATION, 2. XBOX, 3. NINTENDO, 4. PC, 5. SMARTPHONE");
+        }
+
+        System.out.print("Introduce fecha de lanzamiento (formato dd/mm/aaaa): ");
         Videogame videogame = new Videogame();
         return videogame;
     }

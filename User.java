@@ -18,6 +18,15 @@ public class User {
     public User() {
         
     }
+
+    //Constructor for the user
+    public User(String name, String username, String mail, String password) {
+        setName(name);
+        setUsername(username);
+        setMail(mail);
+        setPassword(password);
+    }
+
     //Constructor
     public User(String name, String username, String mail, String password, UserType type, boolean isBanned) {
         setName(name);
@@ -99,5 +108,9 @@ public class User {
 
     public boolean isUserType(UserType type) {
         return getType().equals(type);
+    }
+
+    public void banUser(User user) {
+        user.isBanned = true;
     }
 }

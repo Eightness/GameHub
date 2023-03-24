@@ -18,12 +18,14 @@ public class User {
         
     }
     //Constructor
-    public User(String name, String username, String password, UserType type) {
-        setName(username);
+    public User(String name, String username, String mail, String password, UserType type) {
+        setName(name);
         setUsername(username);
+        setMail(mail);
         setPassword(password);
-        setUsername(username);
+        setType(type);
     }
+    
     //----------------------------------------------------------------------
 
     //Setters

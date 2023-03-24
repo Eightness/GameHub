@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class GameHub {
 
     //Class attributes
+    private User currentUser;
     private UserManager userManager;
     private VideogameManager videogameManager;
     private ReviewManager reviewManager;
@@ -18,7 +19,7 @@ public class GameHub {
 
     //Function to start app
     public void start() {
-        loadEverything();
+        loadObjects();
     }
 
     //Setting objects
@@ -45,12 +46,27 @@ public class GameHub {
 
     //Loading predefined users
     private void loadUsers() {
-
+        //Default admin
+        User admin0 = new User("admin", "admin0", "gamehubadmin@gmail.com","1234", User.UserType.ADMIN);
+        //2 admin accounts
+        User admin1 = new User("Albert", "Bertus", "albertlb08@gmail.com", "1234", User.UserType.ADMIN);
+        User admin2 = new User("Marrahy", "Marra", "sergimarenas@gmail.com", "1234", User.UserType.ADMIN);
+        //Default user
+        User user0 = new User("user", "user0", "gamehubuser@gmail.com", "1234", User.UserType.USER);
+        //Default mod
+        User mod0 = new User("mod", "mod0", "gamehubmod@gmail.com", "1234", User.UserType.MOD);
     }
 
     //Loading predefined videogames
     private void loadVideogames() {
+        Videogame.Platform[] platforms = {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX};
+        Videogame.Genre[] genres = {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE};
 
+        Videogame videogame0 = new Videogame("Minecraft", platforms, genres, "2011");
+        Videogame videogame1 = new Videogame();
+        Videogame videogame2 = new Videogame();
+        Videogame videogame3 = new Videogame();
+        Videogame videogame4 = new Videogame();
     }
 
     //Loading predefined reviews
@@ -59,7 +75,7 @@ public class GameHub {
     }
 
     //Loads everything
-    private void loadEverything() {
+    private void loadObjects() {
         loadUsers();
         loadVideogames();
         loadReviews();
@@ -82,39 +98,98 @@ public class GameHub {
     private void showUserMenu() {
         System.out.println();
         System.out.println("1. Publicar reseña.");
-        System.out.println("2. Edita.");
+        System.out.println("2. Editar reseña.");
+        System.out.println("3. Borrar reseña.");
+        System.out.println("4. Mostrar reseñas.");
+        System.out.println("5. Buscar reseñas.");
+        System.out.println("6. Cerrar sesión.");
         System.out.println();
     }
 
     //Mod menu
     private void showModMenu() {
-
+        System.out.println();
+        System.out.println("1. Publicar reseña.");
+        System.out.println("2. Editar reseña.");
+        System.out.println("3. Borrar reseña.");
+        System.out.println("4. Mostrar reseñas.");
+        System.out.println("5. Buscar reseñas.");
+        System.out.println("6. Borrar reseña ajena.");
+        System.out.println("7. Banear usuario.");
+        System.out.println("8. Cerrar sesión.");
+        System.out.println();
     }
 
     //Admin menu
     private void showAdminMenu() {
+        System.out.println();
+        System.out.println("1. Añadir videojuego.");
+        System.out.println("2. Editar videojuego.");
+        System.out.println("3. Eliminar videojuego.");
+        System.out.println("4. Crear usuario.");
+        System.out.println("5. Modificar datos usuario.");
+        System.out.println("6. Eliminar usuario.");
+        System.out.println("7. Mostrar reseñas.");
+        System.out.println("8. Cerrar sesión.");
+        System.out.println();
+    }
 
+    //Submenu for reviews searching options
+    private void showSubmenuSearching() {
+        System.out.println();
+        System.out.println("1. Buscar reseñas por videojuego.");
+        System.out.println("2. Buscar reseñas por usuario.");
+        System.out.println("3. Buscar reseñas por valoración.");
+        System.out.println("4. Buscar reseñas por horas jugadas.");
+        System.out.println("5. Atrás.");
+        System.out.println();
+    }
+
+    //Submenu for searching reviews by Videogame
+    private void showSubmenuVideogameSearching() {
+        System.out.println();
+        System.out.println("1. Buscar por nombre del videojuego.");
+        System.out.println("2. Buscar por género del videojuego.");
+        System.out.println("3. Buscar por plataforma del videojuego.");
+        System.out.println("4. Atrás.");
+        System.out.println();
     }
 
     //Switches
 
+    //Returns an int determined by user input
+    private int option() {
+        System.out.print("Elige opción: ");
+        return input.nextInt();
+    }
+
     //Switch for Sign in - Register menu
-    private void switchLogIn() {
+    private void switchLogIn(int option) {
 
     }
 
     //Swtich for User menu
-    private void switchUser() {
+    private void switchUser(int option) {
 
     }
 
     //Switch for Mod menu
-    private void switchMod() {
+    private void switchMod(int option) {
 
     }
 
     //Switch for Admin menu
-    private void switchAdmin() {
+    private void switchAdmin(int option) {
+
+    }
+
+    //Switch for submenu searching options
+    private void switchSubmenuSearching(int option) {
+
+    }
+
+    //Switch for submenu searching videogame options
+    private void switchSubmenuVideogame(int option) {
 
     }
 

@@ -107,4 +107,13 @@ public class UserManager {
             }
         }
     }
+
+    public void filterByBan(boolean isBanned) {
+        for (int i = 0; i < numUsers; i++) {
+            if (users[i].isBanned) {
+                System.out.println("Usuario " + (i + 1) + ":");
+                users[i].showUser();
+            }
+        }
+    }
 }

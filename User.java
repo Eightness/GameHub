@@ -11,6 +11,7 @@ public class User {
     //Class attributes
     String name, username, mail, password;
     UserType type;
+    boolean isBanned;
     //----------------------------------------------------------------------
 
     //Void constructor
@@ -18,12 +19,13 @@ public class User {
         
     }
     //Constructor
-    public User(String name, String username, String mail, String password, UserType type) {
+    public User(String name, String username, String mail, String password, UserType type, boolean isBanned) {
         setName(name);
         setUsername(username);
         setMail(mail);
         setPassword(password);
         setType(type);
+        setBanned(isBanned);
     }
     
     //----------------------------------------------------------------------
@@ -44,6 +46,9 @@ public class User {
     public void setType(UserType type) {
         this.type = type;
     }
+    public void setBanned(boolean isBanned) {
+        this.isBanned = isBanned;
+    }
 
     //Getters
     public String getName() {
@@ -60,6 +65,9 @@ public class User {
     }
     public UserType getType() {
         return type;
+    }
+    public boolean getIsBanned() {
+        return isBanned;
     }
     //----------------------------------------------------------------------
 

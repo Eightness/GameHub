@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class GameHub {
 
     //Class attributes
-    private User currentUser;
+    private static User currentUser;
     private UserManager userManager;
     private VideogameManager videogameManager;
     private ReviewManager reviewManager;
@@ -20,44 +20,174 @@ public class GameHub {
     //Function to start app
     public void start() {
         loadObjects();
+
+        showLogInMenu();
+        switchLogIn(option());
+
+        showUserMenu();
+        switchUser(option());
+
+        showModMenu();
+        switchMod(option());
+
+        showAdminMenu();
+        switchAdmin(option());
     }
 
     //Setting objects
 
     //Setting a User
     private User setUser() {
+        System.out.println();
         System.out.print("Introduce nombre: ");
         String name = input.nextLine();
-        System.out.print("Introduce apodo: ");
-        String username = input.nextLine();
-        System.out.print("Introduce correo: ");
-        String mail = input.nextLine();
+        
+        String username;
+        do {
+            System.out.println();
+            System.out.print("Introduce nombre de usuario: ");
+            username = input.nextLine();
+            if (userManager.usernameExists(username)) {
+                System.out.println();
+                System.out.println("Nombre de usuario existente, elige otro.");
+            }
+        } while (userManager.usernameExists(username));
+
+        String mail;
+        do {
+            System.out.println();
+            System.out.print("Introduce correo: ");
+            mail = input.nextLine();
+            if (userManager.mailExists(mail)) {
+                System.out.println();
+                System.out.println("Correo ya registrado, elige otro.");
+            }
+        } while (userManager.mailExists(mail));
+
+        System.out.println();
         System.out.print("Introduce contraseña: ");
         String password = input.nextLine();
+        
         User user = new User(name, username, mail, password);
         return user;
     }
 
     //Setting a Videogame
     private Videogame setVideogame() {
+        System.out.println();
         System.out.print("Introduce nombre: ");
         String name = input.nextLine();
-
+        
+        System.out.println();
         System.out.print("¿En cuántas plataformas está disponible el juego? ");
         int numPlatforms = input.nextInt();
+        
+        Videogame.Platform[] platforms = new Videogame.Platform[numPlatforms];
+        
         for (int i = 0; i < numPlatforms; i++) {
+            System.out.println();
             System.out.println("Introduce plataforma " + (i + 1) + ": ");
             System.out.println("1. PLAYSTATION, 2. XBOX, 3. NINTENDO, 4. PC, 5. SMARTPHONE");
+            switch (input.nextInt()) {
+                case 1:
+                platforms[i] = Videogame.Platform.PLAYSTATION;
+                break;
+                
+                case 2:
+                platforms[i] = Videogame.Platform.XBOX;
+                break;
+                
+                case 3:
+                platforms[i] = Videogame.Platform.NINTENDO;
+                break;
+                
+                case 4:
+                platforms[i] = Videogame.Platform.PC;
+                break;
+                
+                case 5:
+                platforms[i] = Videogame.Platform.SMARTPHONE;
+                break;
+            }
         }
-
+        
+        System.out.println();
+        System.out.println("¿Cuántos géneros tiene el videojuego?");
+        int numGenres = input.nextInt();
+        
+        Videogame.Genre[] genres = new Videogame.Genre[numGenres];
+        
+        for (int i = 0; i < numGenres; i++) {
+            System.out.println();
+            System.out.println("Introduce género " + (i + 1) + ": ");
+            System.out.println("1. ACTION, 2. ADVENTURE, 3. ROLEPLAYING, 4. STRATEGY, 5. SIMULATION, 6. PUZZLE, 7. SHOOTER, 8. OTHER");
+            switch (input.nextInt()) {
+                case 1:
+                genres[i] = Videogame.Genre.ACTION;
+                break;
+                
+                case 2:
+                genres[i] = Videogame.Genre.ADVENTURE;
+                break;
+                
+                case 3:
+                genres[i] = Videogame.Genre.ROLEPLAYING;
+                break;
+                
+                case 4:
+                genres[i] = Videogame.Genre.STRATEGY;
+                break;
+                
+                case 5:
+                genres[i] = Videogame.Genre.SIMULATION;
+                break;
+                
+                case 6:
+                genres[i] = Videogame.Genre.PUZZLE;
+                break;
+                
+                case 7:
+                genres[i] = Videogame.Genre.SHOOTER;
+                break;
+                
+                case 8:
+                genres[i] = Videogame.Genre.OTHER;
+                break;
+            }
+        }
+        
+        System.out.println();
         System.out.print("Introduce fecha de lanzamiento (formato dd/mm/aaaa): ");
-        Videogame videogame = new Videogame();
+        String releaseDate = input.nextLine();
+        
+        Videogame videogame = new Videogame(name, platforms, genres, releaseDate);
         return videogame;
     }
-
+    
     //Setting a Review
     private Review setReview() {
-        Review review = new Review();
+        System.out.println();
+        System.out.println("¿Sobre qué videojuego vas a hacer la reseña?");
+        videogameManager.showVideogames();
+        int election = (input.nextInt() + 1);
+
+        System.out.println();
+        System.out.print("Título: ");
+        String title = input.nextLine();
+        
+        System.out.println();
+        System.out.print("Cuerpo: ");
+        String body = input.nextLine();
+        
+        System.out.println();
+        System.out.print("Valoración (de 1 a 5 estrellas): ");
+        int rating = input.nextInt();
+        
+        System.out.println();
+        System.out.println("¿Cuántas horas has jugado al videojuego?");
+        double playedHours = input.nextDouble();
+
+        Review review = new Review(title, body, rating, playedHours, videogameManager.videogames[election], currentUser);
         return review;
     }
 
@@ -66,56 +196,48 @@ public class GameHub {
     //Loading predefined users
     private void loadUsers() {
         //Default admin
-        User admin0 = new User("admin", "admin0", "gamehubadmin@gmail.com","1234", User.UserType.ADMIN, false);
-        userManager.addUser(admin0);
-        //2 admin accounts
-        User admin1 = new User("Albert", "Bertus", "albertlb08@gmail.com", "1234", User.UserType.ADMIN, false);
-        userManager.addUser(admin1);
-        User admin2 = new User("Marrahy", "Marra", "sergimarenas@gmail.com", "1234", User.UserType.ADMIN, false);
-        userManager.addUser(admin2);
-        //Default user
-        User user0 = new User("user", "user0", "gamehubuser@gmail.com", "1234", User.UserType.USER, false);
+        User user0 = new User("Admin", "admin0", "gamehubadmin@gmail.com","1234", User.UserType.ADMIN, false);
         userManager.addUser(user0);
+        //2 admin accounts
+        User user1 = new User("Albert", "Bertus", "albertlb08@gmail.com", "1234", User.UserType.ADMIN, false);
+        userManager.addUser(user1);
+        User user2 = new User("Marrahy", "Marra", "sergimarenas@gmail.com", "1234", User.UserType.ADMIN, false);
+        userManager.addUser(user2);
+        //Default user
+        User user3 = new User("User", "RandomUser", "gamehubuser@gmail.com", "1234", User.UserType.USER, false);
+        userManager.addUser(user3);
         //Default mod
-        User mod0 = new User("mod", "mod0", "gamehubmod@gmail.com", "1234", User.UserType.MOD, false);
-        userManager.addUser(mod0);
+        User user4 = new User("Mod", "RandomMod", "gamehubmod@gmail.com", "1234", User.UserType.MOD, false);
+        userManager.addUser(user4);
     }
 
     //Loading predefined videogames
     private void loadVideogames() {
-        Videogame.Platform[] platMinecraft = {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX};
-        Videogame.Genre[] genMinecraft = {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE};
-        Videogame videogame0 = new Videogame("Minecraft", platMinecraft, genMinecraft, "2011");
+        //Minecraft
+        Videogame videogame0 = new Videogame("Minecraft", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE}, "2011");
         videogameManager.addVideogame(videogame0);
-
-
-        Videogame.Platform[] platHorizonZeroDawn = {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX};
-        Videogame.Genre[] genHorizonZeroDawn = {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE, Videogame.Genre.SHOOTER};
-        Videogame videogame1 = new Videogame("Horizon Zero Dawn", platHorizonZeroDawn, genHorizonZeroDawn, "2017");
+        //Horizon Zero Dawn
+        Videogame videogame1 = new Videogame("Horizon Zero Dawn", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE, Videogame.Genre.SHOOTER}, "2017");
         videogameManager.addVideogame(videogame1);
-
-
-        Videogame.Platform[] platTetris = {Videogame.Platform.PC, Videogame.Platform.SMARTPHONE};
-        Videogame.Genre[] genTetris = {Videogame.Genre.PUZZLE};
-        Videogame videogame2 = new Videogame("Tetris", platTetris, genTetris, "1984");
+        //Tetris
+        Videogame videogame2 = new Videogame("Tetris", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.SMARTPHONE}, new Videogame.Genre[] {Videogame.Genre.PUZZLE}, "1984");
         videogameManager.addVideogame(videogame2);
-
-
-        Videogame.Platform[] plaTLOU = {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION};
-        Videogame.Genre[] genTLOU = {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE, Videogame.Genre.SHOOTER, Videogame.Genre.PUZZLE};
-        Videogame videogame3 = new Videogame("The las of us", plaTLOU, genTLOU, "2013");
+        //The Last of Us
+        Videogame videogame3 = new Videogame("The Last of Us", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE, Videogame.Genre.SHOOTER, Videogame.Genre.PUZZLE}, "2013");
         videogameManager.addVideogame(videogame3);
-
-
-        Videogame.Platform[] platDiablo4 = {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX};
-        Videogame.Genre[] genDiablo4 = {Videogame.Genre.ACTION, Videogame.Genre.ACTION};
-        Videogame videogame4 = new Videogame("Diablo IV", platDiablo4, genDiablo4, "2023");
+        //Diablo IV
+        Videogame videogame4 = new Videogame("Diablo IV", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ACTION}, "2023");
         videogameManager.addVideogame(videogame4);
     }
 
     //Loading predefined reviews
     private void loadReviews() {
-
+        //Review Albert
+        Review review0 = new Review("Minecraft mola", "Llevo jugando a este juego más de 10 años y me parece increíble. ¡Además, se desarrolló en Java!", 5, 1250.5, videogameManager.videogames[0], userManager.users[1]);
+        reviewManager.addReview(review0);
+        //Review Marrahy
+        Review review1 = new Review("The Last of Us es una obra de arte", "La historia me cautivó desde el primer momento. Increíbles actores y actrices, ahora mismo me estoy gozando la serie de HBO...", 5, 50.6, videogameManager.videogames[3], userManager.users[2]);
+        reviewManager.addReview(review1);
     }
 
     //Loads everything
@@ -199,6 +321,16 @@ public class GameHub {
         System.out.println();
     }
 
+    //Submenu for searching users
+    private void showSubMenuUsersSearching() {
+        System.out.println();
+        System.out.println("1. Buscar por nombre.");
+        System.out.println("2. Buscar por apodo.");
+        System.out.println("3. Buscar por correo.");
+        System.out.println("4. Buscar por ban.");
+        System.out.println();
+    }
+
     //Switches
 
     //Returns an int determined by user input
@@ -209,7 +341,20 @@ public class GameHub {
 
     //Switch for Sign in - Register menu
     private void switchLogIn(int option) {
+        switch (option) {
+            case 1:
+                logIn();
+            break;
+            case 2:
 
+            break;
+            
+            case 3:
+
+            break;
+            default:
+                break;
+        }
     }
 
     //Swtich for User menu
@@ -235,6 +380,43 @@ public class GameHub {
     //Switch for submenu searching videogame options
     private void switchSubmenuVideogame(int option) {
 
+    }
+
+    //Switch for submenu searching user options
+    private void switchSubMenuUser(int option) {
+
+    }
+
+    //Specific functions
+
+    //Log In function
+    private void logIn() {
+        System.out.println();
+        System.out.print("Introduce tu nombre de usuario: ");
+        String username = input.nextLine();
+
+        System.out.println();
+        System.out.print("Introduce tu contraseña: ");
+        String password = input.nextLine();
+
+        if (userManager.getCurrentUser(username, password) == null) {
+            System.out.println();
+            System.out.println("Nombre de usuario o contraseña incorrectos.");
+        } else {
+            currentUser = userManager.getCurrentUser(username, password);
+        }
+
+    }
+
+    //Register function
+    private void register() {
+        if (userManager.isFull()) {
+            System.out.println();
+            System.out.println("No hay espacio para más usuarios.");
+            return;
+        }
+        User newUser = setUser();
+        userManager.addUser(newUser);
     }
 
 }

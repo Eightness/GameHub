@@ -7,7 +7,7 @@ public class VideogameManager {
     //Class attributes
     private int maxVideogames = 10;
     private int numVideogames = 0;
-    private Videogame[] videogames = new Videogame[maxVideogames];
+    public Videogame[] videogames = new Videogame[maxVideogames];
 
     //----------------------------------------------------------------------
 

@@ -5,9 +5,9 @@
 public class UserManager {
 
     //Class attributes
-    int maxUsers = 10;
-    int numUsers = 0;
-    User[] users = new User[maxUsers];
+    private int maxUsers = 10;
+    private int numUsers = 0;
+    public User[] users = new User[maxUsers];
     //----------------------------------------------------------------------
 
     //Void constructor
@@ -116,4 +116,32 @@ public class UserManager {
             }
         }
     }
+
+    public User getCurrentUser(String username, String password) {
+        for (int i = 0; i < numUsers; i++) {
+            if (users[i].isUserName(username) && users[i].correctPassword(password)) {
+                return users[i];
+            }
+        }
+        return null;
+    }
+
+    public boolean usernameExists(String username) {
+        for (int i = 0; i < numUsers; i++) {
+            if (users[i].isUserName(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean mailExists(String mail) {
+        for (int i = 0; i < numUsers; i++) {
+            if (users[i].isMail(mail)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

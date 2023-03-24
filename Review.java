@@ -87,8 +87,8 @@ public class Review {
         System.out.println("Título: " + getTitle());
         System.out.println("Cuerpo: " + getBody());
         System.out.println("Valoración: " + getRating() + "⭐");
-        System.out.println("Usuario: " + getUser());
-        System.out.println("Videojuego: " + getVideogame());
+        System.out.println("Usuario: " + getUser().getUsername());
+        System.out.println("Videojuego: " + getVideogame().getName());
         System.out.println("Horas jugadas: " + getPlayedHours());
         System.out.println("Fecha de publicación: " + getCurrentDate());
         System.out.println();

@@ -6,11 +6,11 @@ public class Videogame {
 
     //Enums
     public enum Platform {
-        PLAYSTATION, XBOX, NINTENDO, PC
+        PLAYSTATION, XBOX, NINTENDO, PC, SMARTPHONE
     }
 
     public enum Genre {
-        ACTION, ADVENTURE, ROLEPLAYING, STRATEGY, SIMULATION, PUZZLE, OTHER
+        ACTION, ADVENTURE, ROLEPLAYING, STRATEGY, SIMULATION, PUZZLE, SHOOTER, OTHER 
     }
     
     //Class attributes

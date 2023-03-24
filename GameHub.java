@@ -47,25 +47,40 @@ public class GameHub {
     //Loading predefined users
     private void loadUsers() {
         //Default admin
-        User admin0 = new User("admin", "admin0", "gamehubadmin@gmail.com","1234", User.UserType.ADMIN);
+        User admin0 = new User("admin", "admin0", "gamehubadmin@gmail.com","1234", User.UserType.ADMIN, false);
         //2 admin accounts
-        User admin1 = new User("Albert", "Bertus", "albertlb08@gmail.com", "1234", User.UserType.ADMIN);
-        User admin2 = new User("Marrahy", "Marra", "sergimarenas@gmail.com", "1234", User.UserType.ADMIN);
+        User admin1 = new User("Albert", "Bertus", "albertlb08@gmail.com", "1234", User.UserType.ADMIN, false);
+        User admin2 = new User("Marrahy", "Marra", "sergimarenas@gmail.com", "1234", User.UserType.ADMIN, false);
         //Default user
-        User user0 = new User("user", "user0", "gamehubuser@gmail.com", "1234", User.UserType.USER);
+        User user0 = new User("user", "user0", "gamehubuser@gmail.com", "1234", User.UserType.USER, false);
         //Default mod
-        User mod0 = new User("mod", "mod0", "gamehubmod@gmail.com", "1234", User.UserType.MOD);
+        User mod0 = new User("mod", "mod0", "gamehubmod@gmail.com", "1234", User.UserType.MOD, false);
     }
 
     //Loading predefined videogames
     private void loadVideogames() {
-        Videogame.Platform[] platforms = {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX};
-        Videogame.Genre[] genres = {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE};
+        Videogame.Platform[] platMinecraft = {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX};
+        Videogame.Genre[] genMinecraft = {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE};
+        Videogame videogame0 = new Videogame("Minecraft", platMinecraft, genMinecraft, "2011");
 
-        Videogame videogame0 = new Videogame("Minecraft", platforms, genres, "2011");
-        Videogame videogame1 = new Videogame();
-        Videogame videogame2 = new Videogame();
-        Videogame videogame3 = new Videogame();
+
+        Videogame.Platform[] platHorizonZeroDawn = {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX};
+        Videogame.Genre[] genHorizonZeroDawn = {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE, Videogame.Genre.SHOOTER};
+        Videogame videogame1 = new Videogame("Horizon Zero Dawn", platHorizonZeroDawn, genHorizonZeroDawn, "2017");
+
+
+        Videogame.Platform[] platTetris = {Videogame.Platform.PC, Videogame.Platform.SMARTPHONE};
+        Videogame.Genre[] genTetris = {Videogame.Genre.PUZZLE};
+        Videogame videogame2 = new Videogame("Tetris", platTetris, genTetris, "1984");
+
+
+        Videogame.Platform[] plaTLOU = {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION};
+        Videogame.Genre[] genTLOU = {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE, Videogame.Genre.SHOOTER, Videogame.Genre.PUZZLE};
+        Videogame videogame3 = new Videogame("The las of us", plaTLOU, genTLOU, "2013");
+
+
+        Videogame.Platform[] platDiablo4 = {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX};
+        Videogame.Genre[] genDiablo4 = {Videogame.Genre.ACTION, Videogame.Genre.ACTION};
         Videogame videogame4 = new Videogame();
     }
 

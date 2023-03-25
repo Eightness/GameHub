@@ -25,6 +25,8 @@ public class User {
         setUsername(username);
         setMail(mail);
         setPassword(password);
+        setType(UserType.USER);
+        setBanned(false);
     }
 
     //Constructor

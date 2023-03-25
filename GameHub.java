@@ -8,9 +8,11 @@ public class GameHub {
 
     //Class attributes
     private static User currentUser;
-    private UserManager userManager;
-    private VideogameManager videogameManager;
-    private ReviewManager reviewManager;
+    private static boolean running = true;
+    private static boolean inside = true;
+    private UserManager userManager = new UserManager();
+    private VideogameManager videogameManager = new VideogameManager();
+    private ReviewManager reviewManager = new ReviewManager();
     Scanner input = new Scanner(System.in);
     
     //----------------------------------------------------------------------
@@ -19,25 +21,92 @@ public class GameHub {
 
     //Function to start app
     public void start() {
+        //Initialization
         loadObjects();
 
-        showLogInMenu();
-        switchLogIn(option());
+        System.out.println();
+        System.out.println("¡Bienvenido@ a GameHub! Aplicación desarrollada por Albert y Marrahy. :)");
+        System.out.println("¡Disfrutad compartiendo reseñas sobre diferentes videojuegos!");
 
-        showUserMenu();
-        switchUser(option());
+        //APP
+        while (running) {
 
-        showModMenu();
-        switchMod(option());
+            //Log In menu
+            if (currentUser == null) {
+                while (true) {
+                    showLogInMenu();
+                    switchLogIn(option());
+                    if (currentUser != null) {
+                        break;
+                    }
+                    if (!running) {
+                        break;
+                    }
+                }
+            } else {
 
-        showAdminMenu();
-        switchAdmin(option());
+                //User Menu
+                if (currentUser.isUserType(User.UserType.USER)) {
+
+                    System.out.println();
+                    System.out.println("¡Bienvenido, " + currentUser.getName() + "!");
+                    System.out.println("Menú para " + currentUser.getType() + ":");
+
+                    while (true) {
+                        showUserMenu();
+                        switchUser(option());
+                        if (currentUser == null) {
+                            break;
+                        }
+                    }
+                }
+    
+                //Mod Menu
+                if (currentUser.isUserType(User.UserType.MOD)) {
+
+                    System.out.println();
+                    System.out.println("¡Bienvenido, " + currentUser.getName() + "!");
+                    System.out.println("Menú para " + currentUser.getType() + ":");
+
+                    while (true) {
+                        showModMenu();
+                        switchMod(option());
+                        if (currentUser == null) {
+                            break;
+                        }
+                    }
+                }
+    
+                //Admin Menu
+                if (currentUser.isUserType(User.UserType.ADMIN)) {
+
+                    System.out.println();
+                    System.out.println("¡Bienvenido, " + currentUser.getName() + "!");
+                    System.out.println("Menú para " + currentUser.getType() + ":");
+
+                    while (true) {
+                        showAdminMenu();
+                        switchAdmin(option());
+                        if (currentUser == null) {
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        System.out.println();
+        System.out.println("¡Muchas gracias por usar nuestra aplicación!");
+        System.out.println("¡Hasta pronto!");
+        System.out.println();
     }
 
     //Setting objects
 
     //Setting a User
     private User setUser() {
+        input.nextLine();   //Clean input buffer
         System.out.println();
         System.out.print("Introduce nombre: ");
         String name = input.nextLine();
@@ -289,14 +358,33 @@ public class GameHub {
     //Admin menu
     private void showAdminMenu() {
         System.out.println();
-        System.out.println("1. Añadir videojuego.");
-        System.out.println("2. Editar videojuego.");
+        System.out.println("1. Administrar videojuegos.");
+        System.out.println("2. Administrar usuarios.");
+        System.out.println("3. Cerrar sesión.");
+        System.out.println();
+    }
+
+    //Admin submenu 1
+    private void showAdminSubmenu1(){
+        System.out.println();
+        System.out.println("1. Crear información videojuego.");
+        System.out.println("2. Editar información videojuego.");
         System.out.println("3. Eliminar videojuego.");
-        System.out.println("4. Crear usuario.");
-        System.out.println("5. Modificar datos usuario.");
-        System.out.println("6. Eliminar usuario.");
-        System.out.println("7. Mostrar reseñas.");
-        System.out.println("8. Cerrar sesión.");
+        System.out.println("4. Mostrar videojuegos.");
+        System.out.println("5. Buscar videojuegos.");
+        System.out.println("6. Atrás.");
+        System.out.println();
+    }
+
+    //Admin submenu 1
+    private void showAdminSubmenu2(){
+        System.out.println();
+        System.out.println("1. Crear usuario.");
+        System.out.println("2. Modificar datos usuario.");
+        System.out.println("3. Eliminar usuario.");
+        System.out.println("4. Mostrar usuarios.");
+        System.out.println("5. Buscar usuarios.");
+        System.out.println("6. Atrás.");
         System.out.println();
     }
 
@@ -342,55 +430,272 @@ public class GameHub {
     //Switch for Sign in - Register menu
     private void switchLogIn(int option) {
         switch (option) {
+            //Iniciar sesión
             case 1:
-                logIn();
+            logIn();
             break;
+            //Registrarse
             case 2:
-
+            register();
             break;
-            
+            //Salir
             case 3:
-
+            running = false;
             break;
-            default:
-                break;
+
+            default: System.out.println("Opción inválida.");
         }
     }
 
     //Swtich for User menu
     private void switchUser(int option) {
+        switch (option) {
+            //Publicar reseña
+            case 1:
+            
+            break;
+            //Editar reseña
+            case 2:
+            
+            break;
+            //Borrar reseña
+            case 3:
 
+            break;
+            //Mostrar reseña
+            case 4:
+
+            break;
+            //Buscar reseñas
+            case 5:
+
+            break;
+            //Cerrar sesión
+            case 6:
+
+            break;
+
+            default: System.out.println("Opción inválida.");
+        }
     }
 
     //Switch for Mod menu
     private void switchMod(int option) {
+        switch (option) {
+            //Publicar reseña
+            case 1:
+            
+            break;
+            //Editar reseña
+            case 2:
+            
+            break;
+            //Borrar reseña
+            case 3:
 
+            break;
+            //Mostrar reseña
+            case 4:
+
+            break;
+            //Buscar reseñas
+            case 5:
+
+            break;
+            //Borrar reseña ajena
+            case 6:
+
+            break;
+            //Banear usuario
+            case 7:
+
+            break;
+            //Cerrar sesión
+            case 8:
+            
+            break;
+            
+            default: System.out.println("Opción inválida.");
+        }
     }
 
     //Switch for Admin menu
     private void switchAdmin(int option) {
+        switch (option) {
+            //Administrar videojuegos
+            case 1:
+            inside = true;
+            while (inside) {
+                showAdminSubmenu1();
+                switchAdminSubmenu1(option());
+            }
+            break;
+            //Administrar usuarios
+            case 2:
+            inside = true;
+            while (inside) {
+                showAdminSubmenu2();
+                switchAdminSubmenu2(option());
+            }
+            break;
+            //Cerrar sesión
+            case 3:
+            currentUser = null;
+            break;
+            
+            default: System.out.println("Opción inválida.");
+        }
+    }
 
+    //Switch for admin submenu 1
+    private void switchAdminSubmenu1(int option){
+        switch (option) {
+            //Crear información videojuego
+            case 1:
+            
+            break;
+            //Editar información videojuego
+            case 2:
+            
+            break;
+            //Eliminar videojuego
+            case 3:
+
+            break;
+            //Mostrar videojuegos
+            case 4:
+
+            break;
+            //Buscar videojuegos
+            case 5:
+
+            break;
+            //Atrás
+            case 6:
+            inside = false;
+            break;
+
+            default: System.out.println("Opción inválida.");
+        }
+    }
+
+    //Switch for admin submenu 2
+    private void switchAdminSubmenu2(int option) {
+        switch (option) {
+            //Crear usuario
+            case 1:
+            
+            break;
+            //Modificar datos usuario
+            case 2:
+            
+            break;
+            //Eliminar usuario
+            case 3:
+
+            break;
+            //Mostrar usuarios
+            case 4:
+
+            break;
+            //Buscar usuarios
+            case 5:
+
+            break;
+            //Atrás
+            case 6:
+            inside = false;
+            break;
+
+            default: System.out.println("Opción inválida.");
+        }
     }
 
     //Switch for submenu searching options
     private void switchSubmenuSearching(int option) {
+        switch (option) {
+            //Buscar por videojuego
+            case 1:
+            
+            break;
+            //Buscar por usuario
+            case 2:
+            
+            break;
+            //Buscar por valoración
+            case 3:
 
+            break;
+            //Buscar por horas jugadas
+            case 4:
+
+            break;
+            //Atrás
+            case 5:
+
+            break;
+            
+            default: System.out.println("Opción inválida.");
+        }
     }
 
     //Switch for submenu searching videogame options
     private void switchSubmenuVideogame(int option) {
+        switch (option) {
+            //Buscar por nombre
+            case 1:
+            
+            break;
+            //Buscar por plataforma
+            case 2:
+            
+            break;
+            //Buscar por género
+            case 3:
 
+            break;
+            //Atrás
+            case 4:
+
+            break;
+            
+            default: System.out.println("Opción inválida.");
+        }
     }
 
     //Switch for submenu searching user options
     private void switchSubMenuUser(int option) {
+        switch (option) {
+            //Buscar por nombre
+            case 1:
+            
+            break;
+            //Buscar por apodo
+            case 2:
+            
+            break;
+            //Buscar por correo
+            case 3:
 
+            break;
+            //Buscar por ban
+            case 4:
+
+            break;
+            //Atrás
+            case 5:
+
+            break;
+            
+            default: System.out.println("Opción inválida.");
+        }
     }
 
     //Specific functions
 
     //Log In function
     private void logIn() {
+        input.nextLine();   //Clean input buffer
         System.out.println();
         System.out.print("Introduce tu nombre de usuario: ");
         String username = input.nextLine();

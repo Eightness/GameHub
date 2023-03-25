@@ -9,7 +9,7 @@ public class GameHub {
     //Class attributes
     private static User currentUser;
     private static boolean running = true;
-    private static boolean inside = true;
+    private static boolean submenu = true;
     private UserManager userManager = new UserManager();
     private VideogameManager videogameManager = new VideogameManager();
     private ReviewManager reviewManager = new ReviewManager();
@@ -43,57 +43,56 @@ public class GameHub {
                         break;
                     }
                 }
-            } else {
+            }
 
-                //User Menu
-                if (currentUser.isUserType(User.UserType.USER)) {
+            //User Menu
+             else if (currentUser.isUserType(User.UserType.USER)) {
 
-                    System.out.println();
-                    System.out.println("¡Bienvenido, " + currentUser.getName() + "!");
-                    System.out.println("Menú para " + currentUser.getType() + ":");
-
-                    while (true) {
-                        showUserMenu();
-                        switchUser(option());
-                        if (currentUser == null) {
-                            break;
-                        }
-                    }
-                }
-    
-                //Mod Menu
-                if (currentUser.isUserType(User.UserType.MOD)) {
-
-                    System.out.println();
-                    System.out.println("¡Bienvenido, " + currentUser.getName() + "!");
-                    System.out.println("Menú para " + currentUser.getType() + ":");
-
-                    while (true) {
-                        showModMenu();
-                        switchMod(option());
-                        if (currentUser == null) {
-                            break;
-                        }
-                    }
-                }
-    
-                //Admin Menu
-                if (currentUser.isUserType(User.UserType.ADMIN)) {
-
-                    System.out.println();
-                    System.out.println("¡Bienvenido, " + currentUser.getName() + "!");
-                    System.out.println("Menú para " + currentUser.getType() + ":");
-
-                    while (true) {
-                        showAdminMenu();
-                        switchAdmin(option());
-                        if (currentUser == null) {
-                            break;
-                        }
+                System.out.println();
+                System.out.println("¡Bienvenido, " + currentUser.getName() + "!");
+                System.out.println("Menú para " + currentUser.getType() + ":");
+                
+                while (true) {
+                    showUserMenu();
+                    switchUser(option());
+                    if (currentUser == null) {
+                        break;
                     }
                 }
             }
 
+            //Mod Menu
+            else if (currentUser.isUserType(User.UserType.MOD)) {
+
+                System.out.println();
+                System.out.println("¡Bienvenido, " + currentUser.getName() + "!");
+                System.out.println("Menú para " + currentUser.getType() + ":");
+
+                while (true) {
+                    showModMenu();
+                    switchMod(option());
+                    if (currentUser == null) {
+                        break;
+                    }
+                }
+            }
+
+            //Admin Menu
+            else if (currentUser.isUserType(User.UserType.ADMIN)) {
+
+                System.out.println();
+                System.out.println("¡Bienvenido, " + currentUser.getName() + "!");
+                System.out.println("Menú para " + currentUser.getType() + ":");
+
+                while (true) {
+                    showAdminMenu();
+                    switchAdmin(option());
+                    if (currentUser == null) {
+                        break;
+                    }
+                }
+            }
+            
         }
 
         System.out.println();
@@ -235,11 +234,12 @@ public class GameHub {
     
     //Setting a Review
     private Review setReview() {
-        System.out.println();
-        System.out.println("¿Sobre qué videojuego vas a hacer la reseña?");
         videogameManager.showVideogames();
+        System.out.println();
+        System.out.print("¿Sobre qué videojuego vas a hacer la reseña? Elige una opción de las anteriores: ");
         int election = (input.nextInt() + 1);
 
+        input.nextLine();
         System.out.println();
         System.out.print("Título: ");
         String title = input.nextLine();
@@ -452,11 +452,29 @@ public class GameHub {
         switch (option) {
             //Publicar reseña
             case 1:
-            
+            reviewManager.addReview(setReview());;
             break;
             //Editar reseña
             case 2:
-            
+            if (!reviewManager.userHasReviews(currentUser)) {
+                System.out.println();
+                System.out.println("No tienes reseñas publicadas que editar.");
+                break;
+            }
+            reviewManager.filterByUser(currentUser);
+            System.out.print("Elige la reseña que deseas editar: ");
+            int reviewElected = input.nextInt();
+            input.nextLine();
+            System.out.println();
+            System.out.print("Nuevo título: ");
+            String title = input.nextLine();
+            System.out.println();
+            System.out.print("Nuevo cuerpo: ");
+            String body = input.nextLine();
+            System.out.println();
+            System.out.print("Nueva valoración: ");
+            int rating = input.nextInt();
+            reviewManager.reviews[reviewElected - 1].editReview(title, body, rating);
             break;
             //Borrar reseña
             case 3:
@@ -472,7 +490,7 @@ public class GameHub {
             break;
             //Cerrar sesión
             case 6:
-
+            currentUser = null;
             break;
 
             default: System.out.println("Opción inválida.");
@@ -512,7 +530,7 @@ public class GameHub {
             break;
             //Cerrar sesión
             case 8:
-            
+            currentUser = null;
             break;
             
             default: System.out.println("Opción inválida.");
@@ -524,16 +542,16 @@ public class GameHub {
         switch (option) {
             //Administrar videojuegos
             case 1:
-            inside = true;
-            while (inside) {
+            submenu = true;
+            while (submenu) {
                 showAdminSubmenu1();
                 switchAdminSubmenu1(option());
             }
             break;
             //Administrar usuarios
             case 2:
-            inside = true;
-            while (inside) {
+            submenu = true;
+            while (submenu) {
                 showAdminSubmenu2();
                 switchAdminSubmenu2(option());
             }
@@ -572,7 +590,7 @@ public class GameHub {
             break;
             //Atrás
             case 6:
-            inside = false;
+            submenu = false;
             break;
 
             default: System.out.println("Opción inválida.");
@@ -604,7 +622,7 @@ public class GameHub {
             break;
             //Atrás
             case 6:
-            inside = false;
+            submenu = false;
             break;
 
             default: System.out.println("Opción inválida.");

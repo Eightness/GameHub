@@ -80,6 +80,7 @@ public class VideogameManager {
     //Shows all Videogames stored
     public void showVideogames() {
         for (int i = 0; i < numVideogames; i++) {
+            System.out.println();
             System.out.println("Videojuego " + (i + 1) + ":");
             videogames[i].showVideogame();
         }

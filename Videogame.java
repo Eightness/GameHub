@@ -82,7 +82,6 @@ public class Videogame {
         System.out.println("Plataforma(s): " + getPlatforms());
         System.out.println("Género: " + getGenres());
         System.out.println("Fecha de lanzamiento: " + getReleaseDate());
-        System.out.println();
     }
 
     //Booleans to do simple checks on the object

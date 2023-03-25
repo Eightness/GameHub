@@ -463,7 +463,7 @@ public class GameHub {
             }
             reviewManager.filterByUser(currentUser);
             System.out.print("Elige la reseña que deseas editar: ");
-            int reviewElected = input.nextInt();
+            int editReview = input.nextInt();
             input.nextLine();
             System.out.println();
             System.out.print("Nuevo título: ");
@@ -474,15 +474,24 @@ public class GameHub {
             System.out.println();
             System.out.print("Nueva valoración: ");
             int rating = input.nextInt();
-            reviewManager.reviews[reviewElected - 1].editReview(title, body, rating);
+            reviewManager.reviews[editReview - 1].editReview(title, body, rating);
             break;
             //Borrar reseña
             case 3:
-
+            if (!reviewManager.userHasReviews(currentUser)) {
+                System.out.println();
+                System.out.println("No tienes reseñas publicadas que editar.");
+                break;
+            }
+            reviewManager.filterByUser(currentUser);
+            System.out.print("Elige la reseña que deseas editar: ");
+            int removeReview = input.nextInt();
+            input.nextLine();
+            reviewManager.removeReview(removeReview);
             break;
-            //Mostrar reseña
+            //Mostrar reseñas
             case 4:
-
+            reviewManager.showReviews();
             break;
             //Buscar reseñas
             case 5:

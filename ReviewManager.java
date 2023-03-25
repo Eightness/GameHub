@@ -82,6 +82,7 @@ public class ReviewManager {
     //Shows all Reviews stored
     public void showReviews() {
         for (int i = 0; i < numReviews; i++) {
+            System.out.println();
             System.out.println("Reseña " + (i + 1) + ":");
             reviews[i].showReview();
         }
@@ -152,6 +153,7 @@ public class ReviewManager {
     public void filterByUser(User user) {
         for (int i = 0; i < numReviews; i++) {
             if (reviews[i].isUser(user)) {
+                System.out.println();
                 System.out.println("Reseña " + (i + 1) + ":");
                 reviews[i].showReview();
             }

@@ -86,12 +86,11 @@ public class Review {
         System.out.println();
         System.out.println("Título: " + getTitle());
         System.out.println("Cuerpo: " + getBody());
-        System.out.println("Valoración: " + getRating() + "⭐");
+        System.out.println("Valoración: " + getRating() + " estrellas");
         System.out.println("Usuario: " + getUser().getUsername());
         System.out.println("Videojuego: " + getVideogame().getName());
         System.out.println("Horas jugadas: " + getPlayedHours());
         System.out.println("Fecha de publicación: " + getCurrentDate());
-        System.out.println();
     }
 
     public void editReview(String title, String body, int rating) {

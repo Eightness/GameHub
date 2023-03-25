@@ -1,6 +1,8 @@
 //Albert Lozano y Sergi Marrahy 
 //1 DAM - Programación
 
+import java.util.Arrays;
+
 //Class done by Albert
 public class Videogame {
 
@@ -79,8 +81,8 @@ public class Videogame {
     public void showVideogame() {
         System.out.println();
         System.out.println("Nombre: " + getName());
-        System.out.println("Plataforma(s): " + getPlatforms());
-        System.out.println("Género: " + getGenres());
+        System.out.println("Plataforma(s): " + Arrays.toString(getPlatforms()));
+        System.out.println("Género: " + Arrays.toString(getGenres()));
         System.out.println("Fecha de lanzamiento: " + getReleaseDate());
     }
 

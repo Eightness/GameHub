@@ -89,7 +89,6 @@ public class User {
         System.out.println("Apodo: " + getUsername());
         System.out.println("Email: " + getMail());
         System.out.println("Tipo de usuario: " + getType());
-        System.out.println();
     }
 
     public boolean isName(String name) {
@@ -112,7 +111,11 @@ public class User {
         return getType().equals(type);
     }
 
-    public void banUser(User user) {
-        user.isBanned = true;
+    public boolean isBanned(User user) {
+        return getIsBanned() == true;
+    }
+
+    public void banUser() {
+        this.isBanned = true;
     }
 }

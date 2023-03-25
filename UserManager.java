@@ -67,6 +67,7 @@ public class UserManager {
 
     public void showUsers() {
         for (int i = 0; i < numUsers; i++) {
+            System.out.println();
             System.out.println("Usuario " + (i + 1) + ":");
             users[i].showUser();
         }
@@ -108,9 +109,20 @@ public class UserManager {
         }
     }
 
-    public void filterByBan(boolean isBanned) {
+    public void filterByBanned() {
         for (int i = 0; i < numUsers; i++) {
             if (users[i].isBanned) {
+                System.out.println();
+                System.out.println("Usuario " + (i + 1) + ":");
+                users[i].showUser();
+            }
+        }
+    }
+
+    public void filterByNotBanned() {
+        for (int i = 0; i < numUsers; i++) {
+            if (!users[i].isBanned) {
+                System.out.println();
                 System.out.println("Usuario " + (i + 1) + ":");
                 users[i].showUser();
             }

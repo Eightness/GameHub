@@ -234,10 +234,18 @@ public class GameHub {
     
     //Setting a Review
     private Review setReview() {
+        int election = 0;
         videogameManager.showVideogames();
-        System.out.println();
-        System.out.print("¿Sobre qué videojuego vas a hacer la reseña? Elige una opción de las anteriores: ");
-        int election = (input.nextInt() - 1);
+        
+        do {
+            System.out.println();
+            System.out.print("¿Sobre qué videojuego vas a hacer la reseña? Elige una opción de las anteriores: ");
+            election = (input.nextInt() - 1);
+            if (election < 0 || election > (videogameManager.numVideogames - 1)) {
+                System.out.println();
+                System.out.println("Videojuego inválido, elige otro.");
+            }
+        } while (election < 0 || election > (videogameManager.numVideogames - 1));
 
         input.nextLine();
         System.out.println();
@@ -251,6 +259,12 @@ public class GameHub {
         System.out.println();
         System.out.print("Valoración (de 1 a 5 estrellas): ");
         int rating = input.nextInt();
+        if (rating > 5) {
+            rating = 5;
+        }
+        if (rating < 1) {
+            rating = 1;
+        }
         
         System.out.println();
         System.out.println("¿Cuántas horas has jugado al videojuego?");
@@ -432,15 +446,15 @@ public class GameHub {
         switch (option) {
             //Iniciar sesión
             case 1:
-            logIn();
+                logIn();
             break;
             //Registrarse
             case 2:
-            register();
+                register();
             break;
             //Salir
             case 3:
-            running = false;
+                running = false;
             break;
 
             default: System.out.println("Opción inválida.");
@@ -452,50 +466,51 @@ public class GameHub {
         switch (option) {
             //Publicar reseña
             case 1:
-            reviewManager.addReview(setReview());;
+                reviewManager.addReview(setReview());;
             break;
             //Editar reseña
             case 2:
-            if (!reviewManager.userHasReviews(currentUser)) {
+                if (!reviewManager.userHasReviews(currentUser)) {
+                    System.out.println();
+                    System.out.println("No tienes reseñas publicadas que editar.");
+                    break;
+                }
+                reviewManager.filterByUser(currentUser);
+                System.out.print("Elige la reseña que deseas editar: ");
+                int editReview = input.nextInt();
+                input.nextLine();
                 System.out.println();
-                System.out.println("No tienes reseñas publicadas que editar.");
-                break;
-            }
-            reviewManager.filterByUser(currentUser);
-            System.out.print("Elige la reseña que deseas editar: ");
-            int editReview = input.nextInt();
-            input.nextLine();
-            System.out.println();
-            System.out.print("Nuevo título: ");
-            String title = input.nextLine();
-            System.out.println();
-            System.out.print("Nuevo cuerpo: ");
-            String body = input.nextLine();
-            System.out.println();
-            System.out.print("Nueva valoración: ");
-            int rating = input.nextInt();
-            reviewManager.reviews[editReview - 1].editReview(title, body, rating);
+                System.out.print("Nuevo título: ");
+                String title = input.nextLine();
+                System.out.println();
+                System.out.print("Nuevo cuerpo: ");
+                String body = input.nextLine();
+                System.out.println();
+                System.out.print("Nueva valoración: ");
+                int rating = input.nextInt();
+                reviewManager.reviews[editReview - 1].editReview(title, body, rating);
             break;
             //Borrar reseña
             case 3:
-            if (!reviewManager.userHasReviews(currentUser)) {
+                if (!reviewManager.userHasReviews(currentUser)) {
+                    System.out.println();
+                    System.out.println("No tienes reseñas publicadas para borrar.");
+                    break;
+                }
+                reviewManager.filterByUser(currentUser);
                 System.out.println();
-                System.out.println("No tienes reseñas publicadas para borrar.");
-                break;
-            }
-            reviewManager.filterByUser(currentUser);
-            System.out.print("Elige la reseña que deseas borrar: ");
-            int removeReview = input.nextInt();
-            input.nextLine();
-            reviewManager.removeReview(removeReview - 1);
+                System.out.print("Elige la reseña que deseas borrar: ");
+                int removeReview = input.nextInt();
+                input.nextLine();
+                reviewManager.removeReview(removeReview - 1);
             break;
             //Mostrar reseñas
             case 4:
-            reviewManager.showReviews();
+                reviewManager.showReviews();
             break;
             //Buscar reseñas
             case 5:
-
+                
             break;
             //Cerrar sesión
             case 6:
@@ -511,70 +526,71 @@ public class GameHub {
         switch (option) {
             //Publicar reseña
             case 1:
-            reviewManager.addReview(setReview());;
+                reviewManager.addReview(setReview());;
             break;
             //Editar reseña
             case 2:
-            if (!reviewManager.userHasReviews(currentUser)) {
+                if (!reviewManager.userHasReviews(currentUser)) {
+                    System.out.println();
+                    System.out.println("No tienes reseñas publicadas que editar.");
+                    break;
+                }
+                reviewManager.filterByUser(currentUser);
+                System.out.print("Elige la reseña que deseas editar: ");
+                int editReview = input.nextInt();
+                input.nextLine();
                 System.out.println();
-                System.out.println("No tienes reseñas publicadas que editar.");
-                break;
-            }
-            reviewManager.filterByUser(currentUser);
-            System.out.print("Elige la reseña que deseas editar: ");
-            int editReview = input.nextInt();
-            input.nextLine();
-            System.out.println();
-            System.out.print("Nuevo título: ");
-            String title = input.nextLine();
-            System.out.println();
-            System.out.print("Nuevo cuerpo: ");
-            String body = input.nextLine();
-            System.out.println();
-            System.out.print("Nueva valoración: ");
-            int rating = input.nextInt();
-            reviewManager.reviews[editReview - 1].editReview(title, body, rating);
+                System.out.print("Nuevo título: ");
+                String title = input.nextLine();
+                System.out.println();
+                System.out.print("Nuevo cuerpo: ");
+                String body = input.nextLine();
+                System.out.println();
+                System.out.print("Nueva valoración: ");
+                int rating = input.nextInt();
+                reviewManager.reviews[editReview - 1].editReview(title, body, rating);
             break;
             //Borrar reseña
             case 3:
-            if (!reviewManager.userHasReviews(currentUser)) {
+                if (!reviewManager.userHasReviews(currentUser)) {
+                    System.out.println();
+                    System.out.println("No tienes reseñas publicadas para borrar.");
+                    break;
+                }
+                reviewManager.filterByUser(currentUser);
                 System.out.println();
-                System.out.println("No tienes reseñas publicadas para borrar.");
-                break;
-            }
-            reviewManager.filterByUser(currentUser);
-            System.out.print("Elige la reseña que deseas borrar: ");
-            int removeReview = input.nextInt();
-            input.nextLine();
-            reviewManager.removeReview(removeReview - 1);
+                System.out.print("Elige la reseña que deseas borrar: ");
+                int removeReview = input.nextInt();
+                input.nextLine();
+                reviewManager.removeReview(removeReview - 1);
             break;
             //Mostrar reseñas
             case 4:
-            reviewManager.showReviews();
+                reviewManager.showReviews();
             break;
             //Buscar reseñas
             case 5:
-
+                
             break;
             //Borrar reseña ajena
             case 6:
-            reviewManager.showReviews();
-            System.out.print("Elige la reseña que deseas borrar: ");
-            int removeAnyReview = input.nextInt();
-            input.nextLine();
-            reviewManager.removeReview(removeAnyReview - 1);
+                reviewManager.showReviews();
+                System.out.print("Elige la reseña que deseas borrar: ");
+                int removeAnyReview = input.nextInt();
+                input.nextLine();
+                reviewManager.removeReview(removeAnyReview - 1);
             break;
             //Banear usuario
             case 7:
-            userManager.filterByNotBanned();
-            System.out.println();
-            System.out.print("Elige al usuario que deseas banear: ");
-            int removeUser = input.nextInt();
-            userManager.users[removeUser - 1].banUser();
+                userManager.filterByNotBanned();
+                System.out.println();
+                System.out.print("Elige al usuario que deseas banear: ");
+                int removeUser = input.nextInt();
+                userManager.users[removeUser - 1].banUser();
             break;
             //Cerrar sesión
             case 8:
-            currentUser = null;
+                currentUser = null;
             break;
             
             default: System.out.println("Opción inválida.");
@@ -586,23 +602,23 @@ public class GameHub {
         switch (option) {
             //Administrar videojuegos
             case 1:
-            submenu = true;
-            while (submenu) {
-                showAdminSubmenu1();
-                switchAdminSubmenu1(option());
-            }
+                submenu = true;
+                while (submenu) {
+                    showAdminSubmenu1();
+                    switchAdminSubmenu1(option());
+                }
             break;
             //Administrar usuarios
             case 2:
-            submenu = true;
-            while (submenu) {
-                showAdminSubmenu2();
-                switchAdminSubmenu2(option());
-            }
+                submenu = true;
+                while (submenu) {
+                    showAdminSubmenu2();
+                    switchAdminSubmenu2(option());
+                }
             break;
             //Cerrar sesión
             case 3:
-            currentUser = null;
+                currentUser = null;
             break;
             
             default: System.out.println("Opción inválida.");
@@ -614,7 +630,7 @@ public class GameHub {
         switch (option) {
             //Crear información videojuego
             case 1:
-            
+
             break;
             //Editar información videojuego
             case 2:

@@ -131,7 +131,7 @@ public class UserManager {
 
     public User getCurrentUser(String username, String password) {
         for (int i = 0; i < numUsers; i++) {
-            if (users[i].getUsername().equals(username) && users[i].correctPassword(password)) {
+            if (users[i].isUserName(username) && users[i].correctPassword(password)) {
                 return users[i];
             }
         }

@@ -8,7 +8,7 @@ public class ReviewManager {
 
     //Class attributes
     private int maxReviews = 100;
-    private int numReviews = 0;
+    public int numReviews = 0;
     public Review[] reviews = new Review[maxReviews];
 
     //----------------------------------------------------------------------

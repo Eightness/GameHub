@@ -32,10 +32,10 @@ public class Videogame {
 
     //Full constructor
     public Videogame(String name, Platform[] platforms, Genre[] genres, String releaseDate) {
-        this.name = name;
-        this.platforms = platforms;
-        this.genres = genres;
-        this.releaseDate = releaseDate;
+        setName(name);
+        setPlatforms(platforms);
+        setGenres(genres);
+        setReleaseDate(releaseDate);
     }
 
     //----------------------------------------------------------------------
@@ -44,35 +44,30 @@ public class Videogame {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getName() {
-        return name;
-    }
-
     public void setPlatforms(Platform[] platforms) {
         this.platforms = platforms;
     }
-
-    public Platform[] getPlatforms() {
-        return platforms;
-    }
-
     public void setGenres(Genre[] genres) {
         this.genres = genres;
     }
-
-    public Genre[] getGenres() {
-        return genres;
-    }
-
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
+    //Getters
+    public String getName() {
+        return name;
+    }
+    public Platform[] getPlatforms() {
+        return platforms;
+    }
+    public Genre[] getGenres() {
+        return genres;
+    }
     public String getReleaseDate() {
         return releaseDate;
     }
-
+    
     //----------------------------------------------------------------------
 
     //Functions

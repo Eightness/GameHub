@@ -446,7 +446,7 @@ public class GameHub {
         switch (option) {
             //Iniciar sesión
             case 1:
-                logIn();
+            logIn();
             break;
             //Registrarse
             case 2:
@@ -466,7 +466,7 @@ public class GameHub {
         switch (option) {
             //Publicar reseña
             case 1:
-                reviewManager.addReview(setReview());;
+                reviewManager.addReview(setReview());
             break;
             //Editar reseña
             case 2:
@@ -514,7 +514,7 @@ public class GameHub {
             break;
             //Cerrar sesión
             case 6:
-            currentUser = null;
+                currentUser = null;
             break;
 
             default: System.out.println("Opción inválida.");

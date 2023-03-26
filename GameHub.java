@@ -158,23 +158,23 @@ public class GameHub {
             System.out.println("1. PLAYSTATION, 2. XBOX, 3. NINTENDO, 4. PC, 5. SMARTPHONE");
             switch (input.nextInt()) {
                 case 1:
-                platforms[i] = Videogame.Platform.PLAYSTATION;
+                    platforms[i] = Videogame.Platform.PLAYSTATION;
                 break;
                 
                 case 2:
-                platforms[i] = Videogame.Platform.XBOX;
+                    platforms[i] = Videogame.Platform.XBOX;
                 break;
                 
                 case 3:
-                platforms[i] = Videogame.Platform.NINTENDO;
+                    platforms[i] = Videogame.Platform.NINTENDO;
                 break;
                 
                 case 4:
-                platforms[i] = Videogame.Platform.PC;
+                    platforms[i] = Videogame.Platform.PC;
                 break;
                 
                 case 5:
-                platforms[i] = Videogame.Platform.SMARTPHONE;
+                    platforms[i] = Videogame.Platform.SMARTPHONE;
                 break;
             }
         }
@@ -191,35 +191,35 @@ public class GameHub {
             System.out.println("1. ACTION, 2. ADVENTURE, 3. ROLEPLAYING, 4. STRATEGY, 5. SIMULATION, 6. PUZZLE, 7. SHOOTER, 8. OTHER");
             switch (input.nextInt()) {
                 case 1:
-                genres[i] = Videogame.Genre.ACTION;
+                    genres[i] = Videogame.Genre.ACTION;
                 break;
                 
                 case 2:
-                genres[i] = Videogame.Genre.ADVENTURE;
+                    genres[i] = Videogame.Genre.ADVENTURE;
                 break;
                 
                 case 3:
-                genres[i] = Videogame.Genre.ROLEPLAYING;
+                    genres[i] = Videogame.Genre.ROLEPLAYING;
                 break;
                 
                 case 4:
-                genres[i] = Videogame.Genre.STRATEGY;
+                    genres[i] = Videogame.Genre.STRATEGY;
                 break;
                 
                 case 5:
-                genres[i] = Videogame.Genre.SIMULATION;
+                    genres[i] = Videogame.Genre.SIMULATION;
                 break;
                 
                 case 6:
-                genres[i] = Videogame.Genre.PUZZLE;
+                    genres[i] = Videogame.Genre.PUZZLE;
                 break;
                 
                 case 7:
-                genres[i] = Videogame.Genre.SHOOTER;
+                    genres[i] = Videogame.Genre.SHOOTER;
                 break;
                 
                 case 8:
-                genres[i] = Videogame.Genre.OTHER;
+                    genres[i] = Videogame.Genre.OTHER;
                 break;
             }
         }
@@ -446,7 +446,7 @@ public class GameHub {
         switch (option) {
             //Iniciar sesión
             case 1:
-            logIn();
+                logIn();
             break;
             //Registrarse
             case 2:

@@ -3,6 +3,8 @@
 
 import java.util.Scanner;
 
+import Videogame.Genre;
+
 //Team class
 public class GameHub {
 
@@ -10,6 +12,7 @@ public class GameHub {
     private static User currentUser;
     private static boolean running = true;
     private static boolean submenu = true;
+    private static boolean submenu2 = true;
     private UserManager userManager = new UserManager();
     private VideogameManager videogameManager = new VideogameManager();
     private ReviewManager reviewManager = new ReviewManager();
@@ -142,6 +145,7 @@ public class GameHub {
 
     //Setting a Videogame
     private Videogame setVideogame() {
+        input.nextLine();
         System.out.println();
         System.out.print("Introduce nombre: ");
         String name = input.nextLine();
@@ -224,6 +228,7 @@ public class GameHub {
             }
         }
         
+        input.nextLine();
         System.out.println();
         System.out.print("Introduce fecha de lanzamiento (formato dd/mm/aaaa): ");
         String releaseDate = input.nextLine();
@@ -321,6 +326,10 @@ public class GameHub {
         //Review Marrahy
         Review review1 = new Review("The Last of Us es una obra de arte", "La historia me cautivó desde el primer momento. Increíbles actores y actrices, ahora mismo me estoy gozando la serie de HBO...", 5, 50.6, videogameManager.videogames[3], userManager.users[2]);
         reviewManager.addReview(review1);
+        //Review randomuser
+        Review review2 = new Review("Diablo 4 pinta muy chulo", "Gran improvement pero es simplemente una versión mejorada de Diablo 3", 3, 2.06, videogameManager.videogames[4], userManager.users[3]);
+        reviewManager.addReview(review2);
+
     }
 
     //Loads everything
@@ -470,7 +479,7 @@ public class GameHub {
             break;
             //Editar reseña
             case 2:
-                if (!reviewManager.userHasReviews(currentUser)) {
+                if (reviewManager.isEmpty()) {
                     System.out.println();
                     System.out.println("No tienes reseñas publicadas que editar.");
                     break;
@@ -492,7 +501,7 @@ public class GameHub {
             break;
             //Borrar reseña
             case 3:
-                if (!reviewManager.userHasReviews(currentUser)) {
+                if (reviewManager.isEmpty()) {
                     System.out.println();
                     System.out.println("No tienes reseñas publicadas para borrar.");
                     break;
@@ -510,7 +519,8 @@ public class GameHub {
             break;
             //Buscar reseñas
             case 5:
-                
+                showSubmenuSearching();
+                switchSubmenuSearching(option());
             break;
             //Cerrar sesión
             case 6:
@@ -530,7 +540,7 @@ public class GameHub {
             break;
             //Editar reseña
             case 2:
-                if (!reviewManager.userHasReviews(currentUser)) {
+                if (reviewManager.isEmpty()) {
                     System.out.println();
                     System.out.println("No tienes reseñas publicadas que editar.");
                     break;
@@ -552,7 +562,7 @@ public class GameHub {
             break;
             //Borrar reseña
             case 3:
-                if (!reviewManager.userHasReviews(currentUser)) {
+                if (reviewManager.isEmpty()) {
                     System.out.println();
                     System.out.println("No tienes reseñas publicadas para borrar.");
                     break;
@@ -630,23 +640,58 @@ public class GameHub {
         switch (option) {
             //Crear información videojuego
             case 1:
-
+                if (videogameManager.isFull()) {
+                    System.out.println();
+                    System.out.println("Límite de videojuegos alcanzado.");
+                    break;
+                }
+                videogameManager.addVideogame(setVideogame());
             break;
             //Editar información videojuego
             case 2:
-            
+                if (videogameManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No hay ningún videojuego en la plataforma actualmente.");
+                    break;
+                }
+                videogameManager.showVideogames();
+                System.out.print("Elige el videojuego que deseas editar: ");
+                int editVideogame = input.nextInt();
+                videogameManager.editVideogame(editVideogame, setVideogame());
             break;
             //Eliminar videojuego
             case 3:
-
+                if (videogameManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No hay ningún videojuego en la plataforma actualmente.");
+                    break;
+                }
+                videogameManager.showVideogames();
+                System.out.print("Elige el videojuego que deseas eliminar: ");
+                int removeVideogame = input.nextInt();
+                videogameManager.removeVideogame(removeVideogame - 1);
             break;
             //Mostrar videojuegos
             case 4:
-
+                if (videogameManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No hay ningún videojuego en la plataforma actualmente.");
+                    break;
+                }
+                videogameManager.showVideogames();
             break;
             //Buscar videojuegos
             case 5:
-
+                if (videogameManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No hay ningún videojuego en la plataforma actualmente.");
+                    break;
+                }
+                submenu2 = true;
+                while (submenu2) {
+                    showSubmenuVideogameSearching();
+                    switchSubmenuVideogame(option());
+                }
             break;
             //Atrás
             case 6:
@@ -662,11 +707,13 @@ public class GameHub {
         switch (option) {
             //Crear usuario
             case 1:
-            
+                userManager.addUser(setUser());
             break;
             //Modificar datos usuario
             case 2:
-            
+                if () {
+                    
+                }
             break;
             //Eliminar usuario
             case 3:
@@ -694,11 +741,59 @@ public class GameHub {
         switch (option) {
             //Buscar por videojuego
             case 1:
-            
+                showSubmenuVideogameSearching();
+                switch (option()) {
+                    case 1:
+                        input.nextLine();
+                        System.out.print("Nombre del videojuego: ");
+                        String name = input.nextLine();
+                        reviewManager.filterByVideogameName(name);
+                    break;
+                    case 2:
+                        System.out.println();
+                        System.out.println("Introduce género: ");
+                        System.out.println("1. ACTION, 2. ADVENTURE, 3. ROLEPLAYING, 4. STRATEGY, 5. SIMULATION, 6. PUZZLE, 7. SHOOTER, 8. OTHER");
+                        int genreSelected = input.nextInt();
+                        switch(genreSelected) {
+                            //Filter by ACTION
+                            case 1:
+                                videogameManager.filterByGenre(Videogame.Genre.ACTION);
+                            break;
+                            //Filter by ADVENTURE
+                            case 2:
+                                videogameManager.filterByGenre(Videogame.Genre.ADVENTURE);
+                            break;
+                            //Filter by ROLEPLAYING
+                            case 3:
+                                videogameManager.filterByGenre(Videogame.Genre.ROLEPLAYING);
+                            break;
+                            //Filter by STRATEGY
+                            case 4:
+                                videogameManager.filterByGenre(Videogame.Genre.STRATEGY);
+                            break;
+                            //Filter by SIMULATION
+                            case 5:
+                                videogameManager.filterByGenre(Videogame.Genre.SIMULATION);
+                            break;
+                            //Filter by PUZZLE
+                            case 6:
+                                videogameManager.filterByGenre(Videogame.Genre.PUZZLE);
+                            break;
+                            //Filter by SHOOTER
+                            case 7:
+                                videogameManager.filterByGenre(Videogame.Genre.SHOOTER);
+                            break;
+                            //Filter by OTHER
+                            case 8:
+                                videogameManager.filterByGenre(Videogame.Genre.OTHER);
+                            break;
+    
+                        default: System.out.println("Opción inválida.");
+                        break;
+                }
             break;
             //Buscar por usuario
             case 2:
-            
             break;
             //Buscar por valoración
             case 3:
@@ -722,19 +817,89 @@ public class GameHub {
         switch (option) {
             //Buscar por nombre
             case 1:
-            
+                input.nextLine();
+                System.out.println();
+                System.out.print("Introduce el nombre: ");
+                String name = input.nextLine();
+                videogameManager.filterByName(name);
             break;
             //Buscar por plataforma
             case 2:
-            
+                System.out.println();
+                System.out.println("Introduce plataforma: ");
+                System.out.println("1. PLAYSTATION, 2. XBOX, 3. NINTENDO, 4. PC, 5. SMARTPHONE");
+                int platformSelected = input.nextInt();
+                switch(platformSelected) {
+                    //Filter by PLAYSTATION
+                    case 1:
+                        videogameManager.filterByPlatform(Videogame.Platform.PLAYSTATION);
+                    break;
+                    //Filter by XBOX
+                    case 2:
+                        videogameManager.filterByPlatform(Videogame.Platform.XBOX);
+                    break;
+                    //Filter by NINTENDO
+                    case 3:
+                        videogameManager.filterByPlatform(Videogame.Platform.NINTENDO);
+                    break;
+                    //Filter by PC
+                    case 4:
+                        videogameManager.filterByPlatform(Videogame.Platform.PC);
+                    break;
+                    //Filter by SMARTPHONE
+                    case 5:
+                        videogameManager.filterByPlatform(Videogame.Platform.SMARTPHONE);
+                    break;
+
+                    default: System.out.println("Opción inválida.");
+                }
             break;
             //Buscar por género
             case 3:
+                System.out.println();
+                System.out.println("Introduce género: ");
+                System.out.println("1. ACTION, 2. ADVENTURE, 3. ROLEPLAYING, 4. STRATEGY, 5. SIMULATION, 6. PUZZLE, 7. SHOOTER, 8. OTHER");
+                int genreSelected = input.nextInt();
+                switch(genreSelected) {
+                    //Filter by ACTION
+                    case 1:
+                        videogameManager.filterByGenre(Videogame.Genre.ACTION);
+                    break;
+                    //Filter by ADVENTURE
+                    case 2:
+                        videogameManager.filterByGenre(Videogame.Genre.ADVENTURE);
+                    break;
+                    //Filter by ROLEPLAYING
+                    case 3:
+                        videogameManager.filterByGenre(Videogame.Genre.ROLEPLAYING);
+                    break;
+                    //Filter by STRATEGY
+                    case 4:
+                        videogameManager.filterByGenre(Videogame.Genre.STRATEGY);
+                    break;
+                    //Filter by SIMULATION
+                    case 5:
+                        videogameManager.filterByGenre(Videogame.Genre.SIMULATION);
+                    break;
+                    //Filter by PUZZLE
+                    case 6:
+                        videogameManager.filterByGenre(Videogame.Genre.PUZZLE);
+                    break;
+                    //Filter by SHOOTER
+                    case 7:
+                        videogameManager.filterByGenre(Videogame.Genre.SHOOTER);
+                    break;
+                    //Filter by OTHER
+                    case 8:
+                        videogameManager.filterByGenre(Videogame.Genre.OTHER);
+                    break;
 
+                    default: System.out.println("Opción inválida.");
+                }
             break;
             //Atrás
             case 4:
-
+                submenu2 = false;
             break;
             
             default: System.out.println("Opción inválida.");

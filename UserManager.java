@@ -156,4 +156,8 @@ public class UserManager {
         return false;
     }
 
+    public void editUser(int edit, User user) {
+        users[edit - 1] = user;
+    }
+
 }

@@ -125,5 +125,11 @@ public class VideogameManager {
             }
         }
     }
+
     
+    //Function to edit a determined videogame
+    public void editVideogame(int edit, Videogame videogame) {
+        videogames[edit - 1] = videogame;
+    }
+
 }

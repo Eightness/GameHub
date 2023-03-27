@@ -159,14 +159,5 @@ public class ReviewManager {
             }
         }
     }
-    
-    //Returns true if user hasn't published any reviews yet
-    public boolean userHasReviews(User user) {
-        for (int i = 0; i < numReviews; i++) {
-            if (reviews[i].isUser(user)) {
-                return true;
-            }
-        }
-        return false;
-    }    
+     
 }

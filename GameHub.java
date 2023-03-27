@@ -603,6 +603,11 @@ public class GameHub {
             break;
             //Desbanear usuario
             case 8:
+                if (!userManager.hasBannedUsers()) {
+                    System.out.println();
+                    System.out.println("No hay usuarios baneados.");
+                    break;
+                }
                 userManager.filterByBanned();
                 System.out.println();
                 System.out.print("Elige al usuario que deseas desbanear: ");

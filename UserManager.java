@@ -160,4 +160,13 @@ public class UserManager {
         users[edit - 1] = user;
     }
 
+    public boolean hasBannedUsers() {
+        for (int i = 0; i < numUsers; i++) {
+            if (users[i].isBanned) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

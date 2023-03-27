@@ -7,11 +7,11 @@ import java.util.Scanner;
 public class GameHub {
 
     //Class attributes
-    private static User currentUser;
-    private static boolean running = true;
-    private static boolean submenu = true;
-    private static boolean submenu2 = true;
-    private UserManager userManager = new UserManager();
+    private static User currentUser;    //This will be the logged in user
+    private static boolean running = true;  //Auxiliar boolean to run the app
+    private static boolean submenu = true;  //Auxiliar boolean to enter a submenu
+    private static boolean submenu2 = true; //Auxiliar boolean to enter a submenu from a submenu
+    private UserManager userManager = new UserManager();    
     private VideogameManager videogameManager = new VideogameManager();
     private ReviewManager reviewManager = new ReviewManager();
     Scanner input = new Scanner(System.in);
@@ -20,16 +20,19 @@ public class GameHub {
 
     //Functions
 
-    //Function to start app
+    //----------------------------------------------------------------------
+
+    //Function to start app (only public function that will be called by Main class)
     public void start() {
         //Initialization
-        loadObjects();
+        loadObjects();  //Loads some users, videogames and reviews (PoC)
 
+        //Welcome
         System.out.println();
         System.out.println("¡Bienvenido@ a GameHub! Aplicación desarrollada por Albert y Marrahy. :)");
         System.out.println("¡Disfrutad compartiendo reseñas sobre diferentes videojuegos!");
 
-        //APP
+        //Main while for the app
         while (running) {
 
             //Log In menu
@@ -46,7 +49,7 @@ public class GameHub {
                 }
             }
 
-            //User Menu
+            //User Menu (if the user is a normal user)
              else if (currentUser.isUserType(User.UserType.USER)) {
 
                 System.out.println();
@@ -62,7 +65,7 @@ public class GameHub {
                 }
             }
 
-            //Mod Menu
+            //Mod Menu (if the user is a mod)
             else if (currentUser.isUserType(User.UserType.MOD)) {
 
                 System.out.println();
@@ -78,7 +81,7 @@ public class GameHub {
                 }
             }
 
-            //Admin Menu
+            //Admin Menu (if the user is an admin)
             else if (currentUser.isUserType(User.UserType.ADMIN)) {
 
                 System.out.println();
@@ -96,13 +99,18 @@ public class GameHub {
             
         }
 
+        //Goodbye
         System.out.println();
         System.out.println("¡Muchas gracias por usar nuestra aplicación!");
         System.out.println("¡Hasta pronto!");
         System.out.println();
     }
 
+    //----------------------------------------------------------------------
+
     //Setting objects
+
+    //----------------------------------------------------------------------
 
     //Setting a User
     private User setUser() {
@@ -178,6 +186,8 @@ public class GameHub {
                 case 5:
                     platforms[i] = Videogame.Platform.SMARTPHONE;
                 break;
+
+                default: System.out.println("Opción inválida.");
             }
         }
         
@@ -223,6 +233,8 @@ public class GameHub {
                 case 8:
                     genres[i] = Videogame.Genre.OTHER;
                 break;
+
+                default: System.out.println("Opción inválida.");
             }
         }
         
@@ -277,7 +289,11 @@ public class GameHub {
         return review;
     }
 
+    //----------------------------------------------------------------------
+
     //Loading different objects
+
+    //----------------------------------------------------------------------
 
     //Loading predefined users
     private void loadUsers() {
@@ -330,14 +346,18 @@ public class GameHub {
 
     }
 
-    //Loads everything
+    //Calls all loading functions to simply call this function in method start()
     private void loadObjects() {
         loadUsers();
         loadVideogames();
         loadReviews();
     }
 
+    //----------------------------------------------------------------------
+
     //Menus
+
+    //----------------------------------------------------------------------
 
     //Showing
 
@@ -442,7 +462,11 @@ public class GameHub {
         System.out.println();
     }
 
-    //Switches
+    //----------------------------------------------------------------------
+
+    //Input methods
+
+    //----------------------------------------------------------------------
 
     //Returns an int determined by user input
     private int option() {
@@ -450,6 +474,12 @@ public class GameHub {
         return input.nextInt();
     }
 
+    //----------------------------------------------------------------------
+
+    //Switches
+
+    //----------------------------------------------------------------------
+    
     //Switch for Sign in - Register menu
     private void switchLogIn(int option) {
         switch (option) {
@@ -470,11 +500,18 @@ public class GameHub {
         }
     }
 
+    //----------------------------------------------------------------------
+
     //Swtich for User menu
     private void switchUser(int option) {
         switch (option) {
             //Publicar reseña
             case 1:
+                if (reviewManager.isFull()) {
+                    System.out.println();
+                    System.out.println("No hay espacio para más reseñas.");
+                    break;
+                }
                 reviewManager.addReview(setReview());
             break;
             //Editar reseña
@@ -485,6 +522,7 @@ public class GameHub {
                     break;
                 }
                 reviewManager.filterByUser(currentUser);
+                System.out.println();
                 System.out.print("Elige la reseña que deseas editar: ");
                 int editReview = input.nextInt();
                 input.nextLine();
@@ -515,10 +553,20 @@ public class GameHub {
             break;
             //Mostrar reseñas
             case 4:
+                if (reviewManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No tienes reseñas publicadas para borrar.");
+                    break;
+                }
                 reviewManager.showReviews();
             break;
             //Buscar reseñas
             case 5:
+                if (reviewManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No tienes reseñas publicadas para borrar.");
+                    break;
+                }
                 submenu = true;
                 while(submenu) {
                     showSubmenuSearching();
@@ -534,12 +582,19 @@ public class GameHub {
         }
     }
 
+    //----------------------------------------------------------------------
+
     //Switch for Mod menu
     private void switchMod(int option) {
         switch (option) {
             //Publicar reseña
             case 1:
-                reviewManager.addReview(setReview());;
+                if (reviewManager.isFull()) {
+                    System.out.println();
+                    System.out.println("No hay espacio para más reseñas.");
+                    break;
+                }
+                reviewManager.addReview(setReview());
             break;
             //Editar reseña
             case 2:
@@ -549,6 +604,7 @@ public class GameHub {
                     break;
                 }
                 reviewManager.filterByUser(currentUser);
+                System.out.println();
                 System.out.print("Elige la reseña que deseas editar: ");
                 int editReview = input.nextInt();
                 input.nextLine();
@@ -579,15 +635,35 @@ public class GameHub {
             break;
             //Mostrar reseñas
             case 4:
+                if (reviewManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No tienes reseñas publicadas para borrar.");
+                    break;
+                }
                 reviewManager.showReviews();
             break;
             //Buscar reseñas
             case 5:
-                
+                if (reviewManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No tienes reseñas publicadas para borrar.");
+                    break;
+                }
+                submenu = true;
+                while(submenu) {
+                    showSubmenuSearching();
+                    switchSubmenuSearching(option());
+                }
             break;
             //Borrar reseña ajena
             case 6:
+                if (reviewManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No tienes reseñas publicadas para borrar.");
+                    break;
+                }
                 reviewManager.showReviews();
+                System.out.println();
                 System.out.print("Elige la reseña que deseas borrar: ");
                 int removeAnyReview = input.nextInt();
                 input.nextLine();
@@ -623,6 +699,8 @@ public class GameHub {
         }
     }
 
+    //----------------------------------------------------------------------
+
     //Switch for Admin menu
     private void switchAdmin(int option) {
         switch (option) {
@@ -651,6 +729,8 @@ public class GameHub {
         }
     }
 
+    //----------------------------------------------------------------------
+
     //Switch for admin submenu 1
     private void switchAdminSubmenu1(int option){
         switch (option) {
@@ -671,6 +751,7 @@ public class GameHub {
                     break;
                 }
                 videogameManager.showVideogames();
+                System.out.println();
                 System.out.print("Elige el videojuego que deseas editar: ");
                 int editVideogame = input.nextInt();
                 videogameManager.editVideogame(editVideogame, setVideogame());
@@ -683,6 +764,7 @@ public class GameHub {
                     break;
                 }
                 videogameManager.showVideogames();
+                System.out.println();
                 System.out.print("Elige el videojuego que deseas eliminar: ");
                 int removeVideogame = input.nextInt();
                 videogameManager.removeVideogame(removeVideogame - 1);
@@ -717,6 +799,8 @@ public class GameHub {
             default: System.out.println("Opción inválida.");
         }
     }
+
+    //----------------------------------------------------------------------
 
     //Switch for admin submenu 2
     private void switchAdminSubmenu2(int option) {
@@ -787,6 +871,8 @@ public class GameHub {
         }
     }
 
+    //----------------------------------------------------------------------
+
     //Switch for submenu searching options
     private void switchSubmenuSearching(int option) {
         switch (option) {
@@ -816,12 +902,14 @@ public class GameHub {
             break;
             //Buscar por valoración
             case 3:
-                System.out.print("Rango de valoración (1 a 5): ");
+                System.out.println();
+                System.out.print("Valoración mínima (1 a 5): ");
                 int rating = input.nextInt();
                 reviewManager.filterByRating(rating);
             break;
             //Buscar por horas jugadas
             case 4:
+                System.out.println();
                 System.out.print("Introduce un mínimo de horas jugadas: ");
                 double numHoursPlayed = input.nextDouble();
                 reviewManager.filterByPlayedHours(numHoursPlayed);
@@ -834,6 +922,8 @@ public class GameHub {
             default: System.out.println("Opción inválida.");
         }
     }
+
+    //----------------------------------------------------------------------
 
     //Switch for submenu searching videogame options
     private void switchSubmenuVideogame(int option) {
@@ -929,6 +1019,8 @@ public class GameHub {
         }
     }
 
+    //----------------------------------------------------------------------
+
     //Switch for submenu searching user options
     private void switchSubMenuUser(int option) {
         switch (option) {
@@ -972,7 +1064,11 @@ public class GameHub {
         }
     }
 
+    //----------------------------------------------------------------------
+
     //Specific functions
+
+    //----------------------------------------------------------------------
 
     //Log In function
     private void logIn() {
@@ -996,8 +1092,9 @@ public class GameHub {
         else {
             currentUser = userManager.getCurrentUser(username, password);
         }
-
     }
+
+    //----------------------------------------------------------------------
 
     //Register function
     private void register() {

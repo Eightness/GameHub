@@ -3,8 +3,6 @@
 
 import java.util.Scanner;
 
-import Videogame.Genre;
-
 //Team class
 public class GameHub {
 
@@ -302,19 +300,19 @@ public class GameHub {
     //Loading predefined videogames
     private void loadVideogames() {
         //Minecraft
-        Videogame videogame0 = new Videogame("Minecraft", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE}, "2011");
+        Videogame videogame0 = new Videogame("Minecraft", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE}, "18/11/2011");
         videogameManager.addVideogame(videogame0);
         //Horizon Zero Dawn
-        Videogame videogame1 = new Videogame("Horizon Zero Dawn", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE, Videogame.Genre.SHOOTER}, "2017");
+        Videogame videogame1 = new Videogame("Horizon Zero Dawn", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE, Videogame.Genre.SHOOTER}, "28/02/2017");
         videogameManager.addVideogame(videogame1);
         //Tetris
-        Videogame videogame2 = new Videogame("Tetris", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.SMARTPHONE}, new Videogame.Genre[] {Videogame.Genre.PUZZLE}, "1984");
+        Videogame videogame2 = new Videogame("Tetris", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.SMARTPHONE}, new Videogame.Genre[] {Videogame.Genre.PUZZLE}, "06/06/1984");
         videogameManager.addVideogame(videogame2);
         //The Last of Us
-        Videogame videogame3 = new Videogame("The Last of Us", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE, Videogame.Genre.SHOOTER, Videogame.Genre.PUZZLE}, "2013");
+        Videogame videogame3 = new Videogame("The Last of Us", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE, Videogame.Genre.SHOOTER, Videogame.Genre.PUZZLE}, "14/06/2013");
         videogameManager.addVideogame(videogame3);
         //Diablo IV
-        Videogame videogame4 = new Videogame("Diablo IV", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ACTION}, "2023");
+        Videogame videogame4 = new Videogame("Diablo IV", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ACTION}, "06/06/2023");
         videogameManager.addVideogame(videogame4);
     }
 
@@ -519,8 +517,11 @@ public class GameHub {
             break;
             //Buscar reseñas
             case 5:
-                showSubmenuSearching();
-                switchSubmenuSearching(option());
+                submenu = true;
+                while(submenu) {
+                    showSubmenuSearching();
+                    switchSubmenuSearching(option());
+                }
             break;
             //Cerrar sesión
             case 6:
@@ -707,25 +708,60 @@ public class GameHub {
         switch (option) {
             //Crear usuario
             case 1:
+                if (userManager.isFull()) {
+                    System.out.println();
+                    System.out.println("Se ha alcanzado el número máximo de usuarios.");
+                    break;
+                }
                 userManager.addUser(setUser());
             break;
             //Modificar datos usuario
             case 2:
-                if () {
-                    
+                if (userManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No hay usuarios registrados actualmente.");
+                    break;
                 }
+                userManager.showUsers();;
+                System.out.println();
+                System.out.print("Elige el usuario que deseas modificar: ");
+                int editUser = input.nextInt();
+                userManager.editUser(editUser, setUser());
             break;
             //Eliminar usuario
             case 3:
-
+                if (userManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No hay usuarios registrados actualmente.");
+                    break;
+                }
+                userManager.showUsers();;
+                System.out.println();
+                System.out.print("Elige el usuario que deseas eliminar: ");
+                int removeUser = input.nextInt();
+                userManager.removeUser(removeUser);
             break;
             //Mostrar usuarios
             case 4:
-
+                if (userManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No hay usuarios registrados actualmente.");
+                    break;
+                }
+                userManager.showUsers();
             break;
             //Buscar usuarios
             case 5:
-
+                if (userManager.isEmpty()) {
+                    System.out.println();
+                    System.out.println("No hay usuarios registrados actualmente.");
+                    break;
+                }
+                submenu2 = true;
+                while (submenu2) {
+                    showSubMenuUsersSearching();
+                    switchSubMenuUser(option());
+                }
             break;
             //Atrás
             case 6:
@@ -741,71 +777,43 @@ public class GameHub {
         switch (option) {
             //Buscar por videojuego
             case 1:
-                showSubmenuVideogameSearching();
-                switch (option()) {
-                    case 1:
-                        input.nextLine();
-                        System.out.print("Nombre del videojuego: ");
-                        String name = input.nextLine();
-                        reviewManager.filterByVideogameName(name);
-                    break;
-                    case 2:
-                        System.out.println();
-                        System.out.println("Introduce género: ");
-                        System.out.println("1. ACTION, 2. ADVENTURE, 3. ROLEPLAYING, 4. STRATEGY, 5. SIMULATION, 6. PUZZLE, 7. SHOOTER, 8. OTHER");
-                        int genreSelected = input.nextInt();
-                        switch(genreSelected) {
-                            //Filter by ACTION
-                            case 1:
-                                videogameManager.filterByGenre(Videogame.Genre.ACTION);
-                            break;
-                            //Filter by ADVENTURE
-                            case 2:
-                                videogameManager.filterByGenre(Videogame.Genre.ADVENTURE);
-                            break;
-                            //Filter by ROLEPLAYING
-                            case 3:
-                                videogameManager.filterByGenre(Videogame.Genre.ROLEPLAYING);
-                            break;
-                            //Filter by STRATEGY
-                            case 4:
-                                videogameManager.filterByGenre(Videogame.Genre.STRATEGY);
-                            break;
-                            //Filter by SIMULATION
-                            case 5:
-                                videogameManager.filterByGenre(Videogame.Genre.SIMULATION);
-                            break;
-                            //Filter by PUZZLE
-                            case 6:
-                                videogameManager.filterByGenre(Videogame.Genre.PUZZLE);
-                            break;
-                            //Filter by SHOOTER
-                            case 7:
-                                videogameManager.filterByGenre(Videogame.Genre.SHOOTER);
-                            break;
-                            //Filter by OTHER
-                            case 8:
-                                videogameManager.filterByGenre(Videogame.Genre.OTHER);
-                            break;
-    
-                        default: System.out.println("Opción inválida.");
-                        break;
+                submenu2 = true;
+                while (submenu2) {
+                    showSubmenuVideogameSearching();
+                    switchSubmenuVideogame(option());
                 }
             break;
             //Buscar por usuario
             case 2:
+                userManager.showUsers();
+                int election = 0;
+                do {
+                    System.out.println();
+                    System.out.print("Elige un usuario de la lista: ");
+                    election = (input.nextInt());
+                    if (election < 0 || election > (userManager.numUsers - 1)) {
+                        System.out.println();
+                        System.out.println("Usuario no válido.");
+                    }
+                } while (election < 0 || election > (userManager.numUsers - 1));
+        
+                reviewManager.filterByUser(userManager.users[election - 1]);
             break;
             //Buscar por valoración
             case 3:
-
+                System.out.print("Rango de valoración (1 a 5): ");
+                int rating = input.nextInt();
+                reviewManager.filterByRating(rating);
             break;
             //Buscar por horas jugadas
             case 4:
-
+                System.out.print("Introduce un mínimo de horas jugadas: ");
+                double numHoursPlayed = input.nextDouble();
+                reviewManager.filterByPlayedHours(numHoursPlayed);
             break;
             //Atrás
             case 5:
-
+                submenu = false;
             break;
             
             default: System.out.println("Opción inválida.");
@@ -911,23 +919,38 @@ public class GameHub {
         switch (option) {
             //Buscar por nombre
             case 1:
-            
+                input.nextLine();
+                System.out.println();
+                System.out.print("Introduce nombre: ");
+                String name = input.nextLine();
+
+                userManager.filterByName(name);
             break;
             //Buscar por apodo
             case 2:
-            
+                input.nextLine();
+                System.out.println();
+                System.out.print("Introduce nombre de usuario: ");
+                String username = input.nextLine();
+
+                userManager.filterByUserName(username);
             break;
             //Buscar por correo
             case 3:
+                input.nextLine();
+                System.out.println();
+                System.out.print("Introduce correo: ");
+                String mail = input.nextLine();
 
+                userManager.filterByMail(mail);
             break;
             //Buscar por ban
             case 4:
-
+                userManager.filterByBanned();
             break;
             //Atrás
             case 5:
-
+                submenu2 = false;
             break;
             
             default: System.out.println("Opción inválida.");

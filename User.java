@@ -100,7 +100,7 @@ public class User {
     }
 
     public boolean isMail(String mail) {
-        return getMail().contains(mail);
+        return getMail().toLowerCase().contains(mail.toLowerCase());
     }
 
     public boolean correctPassword(String password) {

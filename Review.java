@@ -116,6 +116,7 @@ public class Review {
     }
 
     public boolean isUser(User user) {
-        return getUser().equals(user);
+        return getUser() == user;
     }
+
 }

@@ -149,7 +149,7 @@ public class ReviewManager {
         }
     }
 
-    //Shows reviews that have been published by a determined user
+    //Shows reviews that have been published by a determined username
     public void filterByUser(User user) {
         for (int i = 0; i < numReviews; i++) {
             if (reviews[i].isUser(user)) {

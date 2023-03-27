@@ -6,7 +6,7 @@ public class UserManager {
 
     //Class attributes
     private int maxUsers = 10;
-    private int numUsers = 0;
+    public int numUsers = 0;
     public User[] users = new User[maxUsers];
     //----------------------------------------------------------------------
 

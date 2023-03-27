@@ -118,4 +118,8 @@ public class User {
     public void banUser() {
         this.isBanned = true;
     }
+
+    public void unbanUser() {
+        this.isBanned = false;
+    }
 }

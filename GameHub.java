@@ -372,7 +372,8 @@ public class GameHub {
         System.out.println("5. Buscar reseñas.");
         System.out.println("6. Borrar reseña ajena.");
         System.out.println("7. Banear usuario.");
-        System.out.println("8. Cerrar sesión.");
+        System.out.println("8. Desbanear usuario.");
+        System.out.println("9. Cerrar sesión.");
         System.out.println();
     }
 
@@ -600,8 +601,16 @@ public class GameHub {
                 int removeUser = input.nextInt();
                 userManager.users[removeUser - 1].banUser();
             break;
-            //Cerrar sesión
+            //Desbanear usuario
             case 8:
+                userManager.filterByBanned();
+                System.out.println();
+                System.out.print("Elige al usuario que deseas desbanear: ");
+                int unBan = input.nextInt();
+                userManager.users[unBan - 1].unbanUser();
+            break;
+            //Cerrar sesión
+            case 9:
                 currentUser = null;
             break;
             
@@ -974,7 +983,12 @@ public class GameHub {
         if (userManager.getCurrentUser(username, password) == null) {
             System.out.println();
             System.out.println("Nombre de usuario o contraseña incorrectos.");
-        } else {
+        }
+        else if (userManager.getCurrentUser(username, password).isBanned) {
+            System.out.println();
+            System.out.println("Estás baneado.");
+        }
+        else {
             currentUser = userManager.getCurrentUser(username, password);
         }
 

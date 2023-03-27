@@ -27,17 +27,18 @@ public class ReviewManager {
 
     //----------------------------------------------------------------------
 
-    //Setters and Getters
+    //Setters
     public void setMaxReviews(int maxReviews) {
         this.maxReviews = maxReviews;
     }
 
-    public int getMaxReviews() {
-        return maxReviews;
-    }
-
     public void setNumReviews(int numReviews) {
         this.numReviews = numReviews;
+    }
+
+    //Getters
+    public int getMaxReviews() {
+        return maxReviews;
     }
 
     public int getNumReviews() {

@@ -7,10 +7,13 @@ import java.util.Arrays;
 public class Videogame {
 
     //Enums
+
+    //Enum Platform: Each possible platform for a videogame
     public enum Platform {
         PLAYSTATION, XBOX, NINTENDO, PC, SMARTPHONE
     }
 
+    //Enum Genre: Various possible genres for a videogame
     public enum Genre {
         ACTION, ADVENTURE, ROLEPLAYING, STRATEGY, SIMULATION, PUZZLE, SHOOTER, OTHER 
     }
@@ -40,7 +43,7 @@ public class Videogame {
 
     //----------------------------------------------------------------------
 
-    //Setters and Getters
+    //Setters
     public void setName(String name) {
         this.name = name;
     }
@@ -81,9 +84,9 @@ public class Videogame {
         System.out.println("Fecha de lanzamiento: " + getReleaseDate());
     }
 
-    //Booleans to do simple checks on the object
+    //Booleans to do simple checks on the object (help other methods and more legible)
 
-    //Returns true if a String equals to the videogame's name
+    //Returns true if a String is contained in the videogame's name (ignoring case)
     public boolean isName(String name) {
         return getName().toLowerCase().contains(name.toLowerCase());
     }
@@ -108,7 +111,7 @@ public class Videogame {
         return false;
     }
 
-    //Returns true if a String equals or is contained within the videogame's release date
+    //Returns true if a String is contained within the videogame's release date
     public boolean isReleaseDate(String releaseDate) {
         return this.releaseDate.contains(releaseDate);
     }

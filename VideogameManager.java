@@ -25,17 +25,18 @@ public class VideogameManager {
 
     //----------------------------------------------------------------------
 
-    //Setters and Getters
+    //Setters
     public void setMaxVideogames(int maxVideogames) {
         this.maxVideogames = maxVideogames;
     }
 
-    public int getMaxVideogames() {
-        return maxVideogames;
-    }
-
     public void setNumVideogames(int numVideogames) {
         this.numVideogames = numVideogames;
+    }
+
+    //Getters
+    public int getMaxVideogames() {
+        return maxVideogames;
     }
 
     public int getNumVideogames() {
@@ -46,7 +47,7 @@ public class VideogameManager {
 
     //Functions
 
-    //Booleans to check array status
+    //Booleans to check videogames array status
 
     //Returns true if there's no videogame stored yet
     public boolean isEmpty() {
@@ -58,7 +59,7 @@ public class VideogameManager {
         return numVideogames == maxVideogames;
     }
 
-    //Adding and removing array objects
+    //Adding, removing and editing array objects
 
     //Adds an instance of the Videogame class to the array 
     public void addVideogame(Videogame videogame) {
@@ -73,6 +74,11 @@ public class VideogameManager {
             videogames[i] = videogames[i + 1];
         }
         numVideogames--;
+    }
+
+    //Function to edit a determined videogame
+    public void editVideogame(int edit, Videogame videogame) {
+        videogames[edit - 1] = videogame;
     }
 
     //Showing array and filtering
@@ -124,12 +130,6 @@ public class VideogameManager {
                 videogames[i].showVideogame();
             }
         }
-    }
-
-    
-    //Function to edit a determined videogame
-    public void editVideogame(int edit, Videogame videogame) {
-        videogames[edit - 1] = videogame;
     }
 
 }

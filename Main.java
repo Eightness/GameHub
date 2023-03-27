@@ -6,7 +6,7 @@ public class Main {
 
     //MAIN
     public static void main(String[] args) {
-        GameHub gameHub = new GameHub();
-        gameHub.start();
+        GameHub gameHub = new GameHub();    //Create an instance of "GameHub" class
+        gameHub.start();    //Calling out start method in GameHub class
     }
 }

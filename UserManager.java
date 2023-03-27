@@ -8,16 +8,19 @@ public class UserManager {
     private int maxUsers = 10;
     public int numUsers = 0;
     public User[] users = new User[maxUsers];
+
     //----------------------------------------------------------------------
 
-    //Void constructor
+    //Empty constructor
     public UserManager() {
 
     }
-    //Constructor
+    
+    //Constructor that sets the maximum users you can store
     public UserManager(int maxUsers) {
         setMaxUsers(maxUsers);   
     }
+
     //----------------------------------------------------------------------
 
     //Setters
@@ -41,22 +44,30 @@ public class UserManager {
     public User[] getUsers() {
         return users;
     }
+
     //----------------------------------------------------------------------
 
     //Functions
+
+    //Booleans to check users array status
+
+    //Returns true if there are not users in the array
     public boolean isEmpty() {
         return users[0] == null;
     }
 
+    //Returns true if there is no more space to store users
     public boolean isFull() {
         return numUsers == maxUsers;
     }
     
+    //Function to add an user
     public void addUser(User user) {
         users[numUsers] = user;
         numUsers++;
     }
 
+    //Function to remove a user
     public void removeUser(int pos) {
         users[pos] = null;
         for (int i = pos; i < numUsers - 1; i++) {
@@ -65,6 +76,7 @@ public class UserManager {
         numUsers--;
     }
 
+    //Function to show all users data
     public void showUsers() {
         for (int i = 0; i < numUsers; i++) {
             System.out.println();
@@ -73,6 +85,7 @@ public class UserManager {
         }
     }
 
+    //Function to filter by user's name
     public void filterByName(String name) {
         for (int i = 0; i < numUsers; i++) {
             if (users[i].isName(name)) {
@@ -82,6 +95,7 @@ public class UserManager {
         }
     }
 
+    //Function to filter by user's username
     public void filterByUserName(String username) {
         for (int i = 0; i < numUsers; i++) {
             if (users[i].isUserName(username)) {
@@ -91,6 +105,7 @@ public class UserManager {
         }
     }
 
+    //Function to filter by user's mail
     public void filterByMail(String mail) {
         for (int i = 0; i < numUsers; i++) {
             if (users[i].isMail(mail)) {
@@ -100,6 +115,7 @@ public class UserManager {
         }
     }
 
+    //Function to filter by user's type
     public void filterByUserType(User.UserType type) {
         for (int i = 0; i < numUsers; i++) {
             if (users[i].isUserType(type)) {
@@ -109,6 +125,7 @@ public class UserManager {
         }
     }
 
+    //Function to filter by banned users
     public void filterByBanned() {
         for (int i = 0; i < numUsers; i++) {
             if (users[i].isBanned) {
@@ -119,6 +136,7 @@ public class UserManager {
         }
     }
 
+    //Function to filter by not banned users
     public void filterByNotBanned() {
         for (int i = 0; i < numUsers; i++) {
             if (!users[i].isBanned) {
@@ -129,6 +147,7 @@ public class UserManager {
         }
     }
 
+    //Function to get the current user (logged in user / username and password matches)
     public User getCurrentUser(String username, String password) {
         for (int i = 0; i < numUsers; i++) {
             if (users[i].isUserName(username) && users[i].correctPassword(password)) {
@@ -138,6 +157,7 @@ public class UserManager {
         return null;
     }
 
+    //Function to see if a username exists or not
     public boolean usernameExists(String username) {
         for (int i = 0; i < numUsers; i++) {
             if (users[i].isUserName(username)) {
@@ -147,6 +167,7 @@ public class UserManager {
         return false;
     }
 
+    //Function to see if an email is already registered
     public boolean mailExists(String mail) {
         for (int i = 0; i < numUsers; i++) {
             if (users[i].isMail(mail)) {
@@ -156,10 +177,12 @@ public class UserManager {
         return false;
     }
 
+    //Function to modify one user data
     public void editUser(int edit, User user) {
         users[edit - 1] = user;
     }
 
+    //Function to see if there are banned users
     public boolean hasBannedUsers() {
         for (int i = 0; i < numUsers; i++) {
             if (users[i].isBanned) {

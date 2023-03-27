@@ -83,6 +83,8 @@ public class User {
     //----------------------------------------------------------------------
 
     //Functions
+
+    //Function to show user data
     public void showUser() {
         System.out.println();
         System.out.println("Nombre: " + getName());
@@ -90,35 +92,45 @@ public class User {
         System.out.println("Email: " + getMail());
         System.out.println("Tipo de usuario: " + getType());
     }
+    
+    //Booleans to do simple checks on the object (help other methods and more legible)
 
+    //Returns true if a String equals the user's name (ignoring case)
     public boolean isName(String name) {
         return getName().equalsIgnoreCase(name);
     }
 
+    //Returns true if a String equals the user's username (ignoring case)
     public boolean isUserName(String username) {
         return getUsername().equalsIgnoreCase(username);
     }
 
+    //Returns true if a String is contained within the user's mail (ignoring case)
     public boolean isMail(String mail) {
         return getMail().toLowerCase().contains(mail.toLowerCase());
     }
 
+    //Returns true if the introduced password matches the user's password
     public boolean correctPassword(String password) {
         return getPassword().equals(password);
     }
 
+    //Returns true if the type equals the actual user's type
     public boolean isUserType(UserType type) {
         return getType().equals(type);
     }
 
+    //Returns true if the specified user is banned
     public boolean isBanned(User user) {
         return getIsBanned() == true;
     }
 
+    //Function to ban a user
     public void banUser() {
         this.isBanned = true;
     }
 
+    //Function to unban a user
     public void unbanUser() {
         this.isBanned = false;
     }

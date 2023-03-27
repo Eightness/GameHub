@@ -7,21 +7,21 @@ import java.time.LocalDate;
 public class Review {
 
     //Class attributes
-    String title, body;
-    int rating;
-    double playedHours;
-    Videogame videogame;
-    User user;
-    LocalDate currentDate;
+    private String title, body;
+    private int rating;
+    private double playedHours;
+    private Videogame videogame;
+    private User user;
+    private LocalDate currentDate;
     
     //----------------------------------------------------------------------
 
-    //Void constructor
+    //Empty constructor
     public Review() {
 
     }
 
-    //Constructor
+    //Full constructor
     public Review(String title, String body, int rating, double playedHours, Videogame videogame, User user) {
         setTitle(title);
         setBody(body);
@@ -82,6 +82,8 @@ public class Review {
     //----------------------------------------------------------------------
 
     //Functions
+
+    //Function to show all review data
     public void showReview() {
         System.out.println();
         System.out.println("Título: " + getTitle());
@@ -93,28 +95,36 @@ public class Review {
         System.out.println("Fecha de publicación: " + getCurrentDate());
     }
 
+    //Function to edit a review
     public void editReview(String title, String body, int rating) {
         setTitle(title);
         setBody(body);
         setRating(rating);
     }
 
+    //Booleans to do simple checks and help the source code to be more legible
+
+    //Returns true if the review has a minimum rating
     public boolean isRating(int rating) {
         return getRating() >= rating;
     }
 
+    //Returns true if the current date is the same date as a review's date
     public boolean isCurrentDate(LocalDate currentDate) {
         return getCurrentDate().equals(currentDate);
     }
 
+    //Returns true if the review has a minimum played hours
     public boolean hasPlayedHours(double playedHours) {
         return getPlayedHours() >= playedHours;
     }
 
+    //Returns true if a specified videogame is the same as the review's videogame
     public boolean isVideogame(Videogame videogame) {
         return getVideogame().equals(videogame);
     }
 
+    //Returns true if a specified user is the same as the review's user
     public boolean isUser(User user) {
         return getUser() == user;
     }

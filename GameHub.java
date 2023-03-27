@@ -437,6 +437,7 @@ public class GameHub {
         System.out.println("2. Buscar por apodo.");
         System.out.println("3. Buscar por correo.");
         System.out.println("4. Buscar por ban.");
+        System.out.println("5. Atrás.");
         System.out.println();
     }
 

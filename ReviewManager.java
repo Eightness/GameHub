@@ -61,6 +61,16 @@ public class ReviewManager {
         return numReviews == maxReviews;
     }
 
+    //Returns true if a user has reviews
+    public boolean userHasReviews(User user) {
+        for (int i = 0; i < numReviews; i++) {
+            if (reviews[i].getUser() == user) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     //Adding and removing array objects
 
     //Adds an instance of the Review class to the array

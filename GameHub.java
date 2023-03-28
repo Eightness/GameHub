@@ -619,15 +619,22 @@ public class GameHub {
             break;
             //Editar reseña
             case 2:
-                if (reviewManager.isEmpty()) {
+                if (!reviewManager.userHasReviews(currentUser)) {
                     System.out.println();
                     System.out.println("No tienes reseñas publicadas que editar.");
                     break;
                 }
                 reviewManager.filterByUser(currentUser);
-                System.out.println();
-                System.out.print("Elige la reseña que deseas editar: ");
-                int editReview = input.nextInt();
+                int editReview = 0;
+                do {
+                    System.out.println();
+                    System.out.print("Elige la reseña que deseas editar: ");
+                    editReview = input.nextInt();
+                    if (editReview < 1 || editReview > reviewManager.numReviews || reviewManager.reviews[editReview - 1].getUser() != currentUser) {
+                        System.out.println();
+                        System.out.println("Reseña seleccionada inválida.");
+                    }
+                } while (editReview < 1 || editReview > reviewManager.numReviews || reviewManager.reviews[editReview - 1].getUser() != currentUser);
                 input.nextLine();
                 System.out.println();
                 System.out.print("Nuevo título: ");
@@ -642,15 +649,22 @@ public class GameHub {
             break;
             //Borrar reseña
             case 3:
-                if (reviewManager.isEmpty()) {
+                if (!reviewManager.userHasReviews(currentUser)) {
                     System.out.println();
                     System.out.println("No tienes reseñas publicadas para borrar.");
                     break;
                 }
                 reviewManager.filterByUser(currentUser);
-                System.out.println();
-                System.out.print("Elige la reseña que deseas borrar: ");
-                int removeReview = input.nextInt();
+                int removeReview = 0;
+                do {
+                    System.out.println();
+                    System.out.print("Elige la reseña que deseas borrar: ");
+                    removeReview = input.nextInt();
+                    if (removeReview < 1 || removeReview > reviewManager.numReviews || reviewManager.reviews[removeReview - 1].getUser() != currentUser) {
+                        System.out.println();
+                        System.out.println("Reseña seleccionada inválida.");
+                    }
+                } while (removeReview < 1 || removeReview > reviewManager.numReviews || reviewManager.reviews[removeReview - 1].getUser() != currentUser);
                 input.nextLine();
                 reviewManager.removeReview(removeReview - 1);
             break;
@@ -658,7 +672,7 @@ public class GameHub {
             case 4:
                 if (reviewManager.isEmpty()) {
                     System.out.println();
-                    System.out.println("No tienes reseñas publicadas para borrar.");
+                    System.out.println("No hay reseñas.");
                     break;
                 }
                 reviewManager.showReviews();
@@ -667,7 +681,7 @@ public class GameHub {
             case 5:
                 if (reviewManager.isEmpty()) {
                     System.out.println();
-                    System.out.println("No tienes reseñas publicadas para borrar.");
+                    System.out.println("No hay reseñas.");
                     break;
                 }
                 submenu = true;
@@ -780,7 +794,7 @@ public class GameHub {
             case 1:
                 if (videogameManager.isFull()) {
                     System.out.println();
-                    System.out.println("Límite de videojuegos alcanzado.");
+                    System.out.println("Límite de videojuegos para la plataforma alcanzado.");
                     break;
                 }
                 videogameManager.addVideogame(setVideogame());
@@ -793,10 +807,17 @@ public class GameHub {
                     break;
                 }
                 videogameManager.showVideogames();
-                System.out.println();
-                System.out.print("Elige el videojuego que deseas editar: ");
-                int editVideogame = input.nextInt();
-                videogameManager.editVideogame(editVideogame, setVideogame());
+                int editVideogame = 0;
+                do {
+                    System.out.println();
+                    System.out.print("Elige el videojuego que deseas editar: ");
+                    editVideogame = input.nextInt();
+                    if (editVideogame < 1 || editVideogame > videogameManager.numVideogames) {
+                        System.out.println();
+                        System.out.println("Videojuego seleccionado inválido.");
+                    }
+                } while (editVideogame < 1 || editVideogame > videogameManager.numVideogames);
+                videogameManager.editVideogame(editVideogame - 1, setVideogame());
             break;
             //Eliminar videojuego
             case 3:

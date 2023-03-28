@@ -806,9 +806,16 @@ public class GameHub {
                     break;
                 }
                 videogameManager.showVideogames();
-                System.out.println();
-                System.out.print("Elige el videojuego que deseas eliminar: ");
-                int removeVideogame = input.nextInt();
+                int removeVideogame = 0;
+                do {
+                    System.out.println();
+                    System.out.print("Elige el videojuego que deseas eliminar: ");
+                    removeVideogame = input.nextInt();
+                    if (removeVideogame < 1 || removeVideogame > videogameManager.numVideogames) {
+                        System.out.println();
+                        System.out.println("Videjuego seleccionado inválido.");
+                    }
+                } while (removeVideogame < 1 || removeVideogame > videogameManager.numVideogames);
                 videogameManager.removeVideogame(removeVideogame - 1);
             break;
             //Mostrar videojuegos

@@ -663,19 +663,33 @@ public class GameHub {
                     break;
                 }
                 reviewManager.showReviews();
-                System.out.println();
-                System.out.print("Elige la reseña que deseas borrar: ");
-                int removeAnyReview = input.nextInt();
-                input.nextLine();
+                int removeAnyReview = 0;
+                do {
+                    System.out.println();
+                    System.out.print("Elige la reseña que deseas borrar: ");
+                    removeAnyReview = input.nextInt();
+                    input.nextLine();
+                    if (removeAnyReview < 1 || removeAnyReview > reviewManager.numReviews) {
+                       System.out.println("");
+                       System.out.println("Reseña seleccionada inválida.");
+                    }
+                } while(removeAnyReview < 1 || removeAnyReview > reviewManager.numReviews);
                 reviewManager.removeReview(removeAnyReview - 1);
             break;
             //Banear usuario
             case 7:
                 userManager.filterByNotBanned();
-                System.out.println();
-                System.out.print("Elige al usuario que deseas banear: ");
-                int removeUser = input.nextInt();
-                userManager.users[removeUser - 1].banUser();
+                int banUser = 0;
+                do {
+                    System.out.println();
+                    System.out.print("Elige al usuario que deseas banear: ");
+                    banUser = input.nextInt();
+                    if (banUser < 1 || banUser > userManager.numUsers || userManager.users[banUser - 1].isBanned) {
+                        System.out.println();
+                        System.out.println("Usuario seleccionado inválido.");
+                    }
+                } while (banUser < 1 || banUser > userManager.numUsers || userManager.users[banUser - 1].isBanned);
+                userManager.users[banUser - 1].banUser();
             break;
             //Desbanear usuario
             case 8:

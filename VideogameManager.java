@@ -59,6 +59,16 @@ public class VideogameManager {
         return numVideogames == maxVideogames;
     }
 
+    //Returns true if there's already a game with a determined name
+    public boolean videogameExists(String name) {
+        for (int i = 0; i < numVideogames; i++) {
+            if (videogames[i].isName(name)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     //Adding, removing and editing array objects
 
     //Adds an instance of the Videogame class to the array 

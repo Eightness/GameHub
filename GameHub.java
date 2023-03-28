@@ -152,9 +152,16 @@ public class GameHub {
     //Setting a Videogame
     private Videogame setVideogame() {
         input.nextLine();
-        System.out.println();
-        System.out.print("Introduce nombre: ");
-        String name = input.nextLine();
+        String name = "";
+        do {
+            System.out.println();
+            System.out.print("Introduce nombre: ");
+            name = input.nextLine();
+            if (videogameManager.videogameExists(name)) {
+                System.out.println();
+                System.out.println("Videojuego ya existente.");
+            }
+        } while (videogameManager.videogameExists(name));
         
         System.out.println();
         System.out.print("¿En cuántas plataformas está disponible el juego? ");
@@ -699,9 +706,16 @@ public class GameHub {
                     break;
                 }
                 userManager.filterByBanned();
-                System.out.println();
-                System.out.print("Elige al usuario que deseas desbanear: ");
-                int unBan = input.nextInt();
+                int unBan = 0;
+                do {
+                    System.out.println();
+                    System.out.print("Elige al usuario que deseas desbanear: ");
+                    unBan = input.nextInt();
+                    if (unBan < 1 || unBan > userManager.numUsers || !userManager.users[unBan - 1].isBanned) {
+                        System.out.println();
+                        System.out.println("Usuario seleccionado inválido.");
+                    }
+                } while (unBan < 1 || unBan > userManager.numUsers || !userManager.users[unBan - 1].isBanned);
                 userManager.users[unBan - 1].unbanUser();
             break;
             //Cerrar sesión

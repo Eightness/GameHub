@@ -8,13 +8,15 @@ public class User {
     public enum UserType {
         ADMIN, MOD, USER
     }
+
     //Class attributes
     String name, username, mail, password;
     UserType type;
     boolean isBanned;
+
     //----------------------------------------------------------------------
 
-    //Void constructor
+    //Empty constructor
     public User() {
         
     }

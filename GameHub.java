@@ -598,6 +598,8 @@ public class GameHub {
             break;
             //Cerrar sesión
             case 6:
+                System.out.println();
+                System.out.println("¡Hasta la próxima, " + currentUser.getName() + "!");
                 currentUser = null;
             break;
 
@@ -752,6 +754,8 @@ public class GameHub {
             break;
             //Cerrar sesión
             case 9:
+                System.out.println();
+                System.out.println("¡Hasta la próxima, " + currentUser.getName() + "!");
                 currentUser = null;
             break;
             
@@ -782,6 +786,8 @@ public class GameHub {
             break;
             //Cerrar sesión
             case 3:
+                System.out.println();
+                System.out.println("¡Hasta la próxima, " + currentUser.getName() + "!");
                 currentUser = null;
             break;
             

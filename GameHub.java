@@ -151,7 +151,7 @@ public class GameHub {
 
     //Setting a Videogame
     private Videogame setVideogame() {
-        input.nextLine();
+        input.nextLine();   //Clean input buffer
         String name = "";
         do {
             System.out.println();
@@ -245,7 +245,7 @@ public class GameHub {
             }
         }
         
-        input.nextLine();
+        input.nextLine();   //Clean input buffer
         System.out.println();
         System.out.print("Introduce fecha de lanzamiento (formato dd/mm/aaaa): ");
         String releaseDate = input.nextLine();
@@ -269,7 +269,7 @@ public class GameHub {
             }
         } while (election < 0 || election > (videogameManager.numVideogames - 1));
 
-        input.nextLine();
+        input.nextLine();   //Clean input buffer
         System.out.println();
         System.out.print("Título: ");
         String title = input.nextLine();
@@ -539,7 +539,8 @@ public class GameHub {
                         System.out.println("Reseña seleccionada inválida.");
                     }
                 } while (editReview < 1 || editReview > reviewManager.numReviews || reviewManager.reviews[editReview - 1].getUser() != currentUser);
-                input.nextLine();
+
+                input.nextLine();   //Clean input buffer
                 System.out.println();
                 System.out.print("Nuevo título: ");
                 String title = input.nextLine();
@@ -569,7 +570,8 @@ public class GameHub {
                         System.out.println("Reseña seleccionada inválida.");
                     }
                 } while (removeReview < 1 || removeReview > reviewManager.numReviews || reviewManager.reviews[removeReview - 1].getUser() != currentUser);
-                input.nextLine();
+
+                input.nextLine();   //Clean input buffer
                 reviewManager.removeReview(removeReview - 1);
             break;
             //Mostrar reseñas
@@ -635,7 +637,8 @@ public class GameHub {
                         System.out.println("Reseña seleccionada inválida.");
                     }
                 } while (editReview < 1 || editReview > reviewManager.numReviews || reviewManager.reviews[editReview - 1].getUser() != currentUser);
-                input.nextLine();
+
+                input.nextLine();   //Clean input buffer
                 System.out.println();
                 System.out.print("Nuevo título: ");
                 String title = input.nextLine();
@@ -665,7 +668,8 @@ public class GameHub {
                         System.out.println("Reseña seleccionada inválida.");
                     }
                 } while (removeReview < 1 || removeReview > reviewManager.numReviews || reviewManager.reviews[removeReview - 1].getUser() != currentUser);
-                input.nextLine();
+
+                input.nextLine();   //Clean input buffer
                 reviewManager.removeReview(removeReview - 1);
             break;
             //Mostrar reseñas
@@ -703,7 +707,7 @@ public class GameHub {
                     System.out.println();
                     System.out.print("Elige la reseña que deseas borrar: ");
                     removeAnyReview = input.nextInt();
-                    input.nextLine();
+                    input.nextLine();   //Clean input buffer
                     if (removeAnyReview < 1 || removeAnyReview > reviewManager.numReviews) {
                        System.out.println("");
                        System.out.println("Reseña seleccionada inválida.");
@@ -1000,7 +1004,7 @@ public class GameHub {
         switch (option) {
             //Buscar por nombre
             case 1:
-                input.nextLine();
+                input.nextLine();   //Clean input buffer
                 System.out.println();
                 System.out.print("Introduce el nombre: ");
                 String name = input.nextLine();
@@ -1096,7 +1100,7 @@ public class GameHub {
         switch (option) {
             //Buscar por nombre
             case 1:
-                input.nextLine();
+                input.nextLine();   //Clean input buffer
                 System.out.println();
                 System.out.print("Introduce nombre: ");
                 String name = input.nextLine();
@@ -1105,7 +1109,7 @@ public class GameHub {
             break;
             //Buscar por apodo
             case 2:
-                input.nextLine();
+                input.nextLine();   //Clean input buffer
                 System.out.println();
                 System.out.print("Introduce nombre de usuario: ");
                 String username = input.nextLine();
@@ -1114,7 +1118,7 @@ public class GameHub {
             break;
             //Buscar por correo
             case 3:
-                input.nextLine();
+                input.nextLine();   //Clean input buffer
                 System.out.println();
                 System.out.print("Introduce correo: ");
                 String mail = input.nextLine();

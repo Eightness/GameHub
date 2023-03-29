@@ -88,7 +88,7 @@ public class Videogame {
 
     //Returns true if a String is contained in the videogame's name (ignoring case)
     public boolean isName(String name) {
-        return getName().toLowerCase().contains(name.toLowerCase());
+        return getName().equalsIgnoreCase(name);
     }
 
     //Returns true if a Genre is the same as (at least one of) the videogame's genres

@@ -199,7 +199,7 @@ public class GameHub {
         }
         
         System.out.println();
-        System.out.println("¿Cuántos géneros tiene el videojuego?");
+        System.out.print("¿Cuántos géneros tiene el videojuego?");
         int numGenres = input.nextInt();
         
         Videogame.Genre[] genres = new Videogame.Genre[numGenres];
@@ -335,7 +335,7 @@ public class GameHub {
         Videogame videogame3 = new Videogame("The Last of Us", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ADVENTURE, Videogame.Genre.SHOOTER, Videogame.Genre.PUZZLE}, "14/06/2013");
         videogameManager.addVideogame(videogame3);
         //Diablo IV
-        Videogame videogame4 = new Videogame("Diablo IV", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ACTION}, "06/06/2023");
+        Videogame videogame4 = new Videogame("Diablo IV", new Videogame.Platform[] {Videogame.Platform.PC, Videogame.Platform.PLAYSTATION, Videogame.Platform.XBOX}, new Videogame.Genre[] {Videogame.Genre.ACTION, Videogame.Genre.ROLEPLAYING}, "06/06/2023");
         videogameManager.addVideogame(videogame4);
     }
 
@@ -452,8 +452,8 @@ public class GameHub {
     private void showSubmenuVideogameSearching() {
         System.out.println();
         System.out.println("1. Buscar por nombre del videojuego.");
-        System.out.println("2. Buscar por género del videojuego.");
-        System.out.println("3. Buscar por plataforma del videojuego.");
+        System.out.println("2. Buscar por plataforma del videojuego.");
+        System.out.println("3. Buscar por género del videojuego.");
         System.out.println("4. Atrás.");
         System.out.println();
     }
@@ -971,7 +971,7 @@ public class GameHub {
                 do {
                     System.out.println();
                     System.out.print("Elige un usuario de la lista: ");
-                    election = (input.nextInt());
+                    election = input.nextInt();
                     if (election < 0 || election > (userManager.numUsers - 1)) {
                         System.out.println();
                         System.out.println("Usuario no válido.");

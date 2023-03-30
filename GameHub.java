@@ -916,7 +916,7 @@ public class GameHub {
                 }
                 for (int i = 0; i < userManager.numUsers; i++) {
                     if (userManager.users[i].getUsername() != currentUser.getUsername())
-                        System.out.println((i) + ". " + userManager.users[i].getName());
+                        userManager.users[i].showUser();
                 }
                 int removeUser;
                 do {

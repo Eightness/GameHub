@@ -490,15 +490,15 @@ public class GameHub {
     //Switch for Sign in - Register menu
     private void switchLogIn(int option) {
         switch (option) {
-            //Iniciar sesión
+            //Log in
             case 1:
                 logIn();
             break;
-            //Registrarse
+            //Register
             case 2:
                 register();
             break;
-            //Salir
+            //Exit
             case 3:
                 running = false;
             break;
@@ -512,7 +512,7 @@ public class GameHub {
     //Swtich for User menu
     private void switchUser(int option) {
         switch (option) {
-            //Publicar reseña
+            //Post review
             case 1:
                 if (reviewManager.isFull()) {
                     System.out.println();
@@ -521,7 +521,7 @@ public class GameHub {
                 }
                 reviewManager.addReview(setReview());
             break;
-            //Editar reseña
+            //Review edit
             case 2:
                 if (!reviewManager.userHasReviews(currentUser)) {
                     System.out.println();
@@ -552,7 +552,7 @@ public class GameHub {
                 int rating = input.nextInt();
                 reviewManager.reviews[editReview - 1].editReview(title, body, rating);
             break;
-            //Borrar reseña
+            //Remove review
             case 3:
                 if (!reviewManager.userHasReviews(currentUser)) {
                     System.out.println();
@@ -574,7 +574,7 @@ public class GameHub {
                 input.nextLine();   //Clean input buffer
                 reviewManager.removeReview(removeReview - 1);
             break;
-            //Mostrar reseñas
+            //Show reviews
             case 4:
                 if (reviewManager.isEmpty()) {
                     System.out.println();
@@ -583,7 +583,7 @@ public class GameHub {
                 }
                 reviewManager.showReviews();
             break;
-            //Buscar reseñas
+            //Search review
             case 5:
                 if (reviewManager.isEmpty()) {
                     System.out.println();
@@ -596,7 +596,7 @@ public class GameHub {
                     switchSubmenuSearching(option());
                 }
             break;
-            //Cerrar sesión
+            //Log out
             case 6:
                 System.out.println();
                 System.out.println("¡Hasta la próxima, " + currentUser.getName() + "!");
@@ -612,7 +612,7 @@ public class GameHub {
     //Switch for Mod menu
     private void switchMod(int option) {
         switch (option) {
-            //Publicar reseña
+            //Post review
             case 1:
                 if (reviewManager.isFull()) {
                     System.out.println();
@@ -621,7 +621,7 @@ public class GameHub {
                 }
                 reviewManager.addReview(setReview());
             break;
-            //Editar reseña
+            //Edit review
             case 2:
                 if (!reviewManager.userHasReviews(currentUser)) {
                     System.out.println();
@@ -652,7 +652,7 @@ public class GameHub {
                 int rating = input.nextInt();
                 reviewManager.reviews[editReview - 1].editReview(title, body, rating);
             break;
-            //Borrar reseña
+            //Remove review
             case 3:
                 if (!reviewManager.userHasReviews(currentUser)) {
                     System.out.println();
@@ -674,7 +674,7 @@ public class GameHub {
                 input.nextLine();   //Clean input buffer
                 reviewManager.removeReview(removeReview - 1);
             break;
-            //Mostrar reseñas
+            //Show review
             case 4:
                 if (reviewManager.isEmpty()) {
                     System.out.println();
@@ -683,7 +683,7 @@ public class GameHub {
                 }
                 reviewManager.showReviews();
             break;
-            //Buscar reseñas
+            //Search by review
             case 5:
                 if (reviewManager.isEmpty()) {
                     System.out.println();
@@ -696,7 +696,7 @@ public class GameHub {
                     switchSubmenuSearching(option());
                 }
             break;
-            //Borrar reseña ajena
+            //Remove foreign review
             case 6:
                 if (reviewManager.isEmpty()) {
                     System.out.println();
@@ -717,7 +717,7 @@ public class GameHub {
                 } while(removeAnyReview < 1 || removeAnyReview > reviewManager.numReviews);
                 reviewManager.removeReview(removeAnyReview - 1);
             break;
-            //Banear usuario
+            //Ban user
             case 7:
                 userManager.filterByNotBanned();
                 int banUser = 0;
@@ -732,7 +732,7 @@ public class GameHub {
                 } while (banUser < 1 || banUser > userManager.numUsers || userManager.users[banUser - 1].isBanned);
                 userManager.users[banUser - 1].banUser();
             break;
-            //Desbanear usuario
+            //Unban user
             case 8:
                 if (!userManager.hasBannedUsers()) {
                     System.out.println();
@@ -752,7 +752,7 @@ public class GameHub {
                 } while (unBan < 1 || unBan > userManager.numUsers || !userManager.users[unBan - 1].isBanned);
                 userManager.users[unBan - 1].unbanUser();
             break;
-            //Cerrar sesión
+            //Log out
             case 9:
                 System.out.println();
                 System.out.println("¡Hasta la próxima, " + currentUser.getName() + "!");
@@ -768,7 +768,7 @@ public class GameHub {
     //Switch for Admin menu
     private void switchAdmin(int option) {
         switch (option) {
-            //Administrar videojuegos
+            //Videogame management
             case 1:
                 submenu = true;
                 while (submenu) {
@@ -776,7 +776,7 @@ public class GameHub {
                     switchAdminSubmenu1(option());
                 }
             break;
-            //Administrar usuarios
+            //User management
             case 2:
                 submenu = true;
                 while (submenu) {
@@ -784,7 +784,7 @@ public class GameHub {
                     switchAdminSubmenu2(option());
                 }
             break;
-            //Cerrar sesión
+            //Log out
             case 3:
                 System.out.println();
                 System.out.println("¡Hasta la próxima, " + currentUser.getName() + "!");
@@ -800,7 +800,7 @@ public class GameHub {
     //Switch for admin submenu 1
     private void switchAdminSubmenu1(int option){
         switch (option) {
-            //Crear información videojuego
+            //Add videogame info
             case 1:
                 if (videogameManager.isFull()) {
                     System.out.println();
@@ -809,7 +809,7 @@ public class GameHub {
                 }
                 videogameManager.addVideogame(setVideogame());
             break;
-            //Editar información videojuego
+            //Modify videogame info
             case 2:
                 if (videogameManager.isEmpty()) {
                     System.out.println();
@@ -829,7 +829,7 @@ public class GameHub {
                 } while (editVideogame < 1 || editVideogame > videogameManager.numVideogames);
                 videogameManager.editVideogame(editVideogame - 1, setVideogame());
             break;
-            //Eliminar videojuego
+            //Remove videogame
             case 3:
                 if (videogameManager.isEmpty()) {
                     System.out.println();
@@ -849,7 +849,7 @@ public class GameHub {
                 } while (removeVideogame < 1 || removeVideogame > videogameManager.numVideogames);
                 videogameManager.removeVideogame(removeVideogame - 1);
             break;
-            //Mostrar videojuegos
+            //Show videogames
             case 4:
                 if (videogameManager.isEmpty()) {
                     System.out.println();
@@ -858,7 +858,7 @@ public class GameHub {
                 }
                 videogameManager.showVideogames();
             break;
-            //Buscar videojuegos
+            //Search by videogame
             case 5:
                 if (videogameManager.isEmpty()) {
                     System.out.println();
@@ -871,7 +871,7 @@ public class GameHub {
                     switchSubmenuVideogame(option());
                 }
             break;
-            //Atrás
+            //Back
             case 6:
             submenu = false;
             break;
@@ -885,7 +885,7 @@ public class GameHub {
     //Switch for admin submenu 2
     private void switchAdminSubmenu2(int option) {
         switch (option) {
-            //Crear usuario
+            //Add user
             case 1:
                 if (userManager.isFull()) {
                     System.out.println();
@@ -894,7 +894,7 @@ public class GameHub {
                 }
                 userManager.addUser(setUser());
             break;
-            //Modificar datos usuario
+            //Modify user data
             case 2:
                 if (userManager.isEmpty()) {
                     System.out.println();
@@ -907,20 +907,30 @@ public class GameHub {
                 int editUser = input.nextInt();
                 userManager.editUser(editUser, setUser());
             break;
-            //Eliminar usuario
+            //Delete user
             case 3:
                 if (userManager.isEmpty()) {
                     System.out.println();
                     System.out.println("No hay usuarios registrados actualmente.");
                     break;
                 }
-                userManager.showUsers();;
-                System.out.println();
-                System.out.print("Elige el usuario que deseas eliminar: ");
-                int removeUser = input.nextInt();
+                for (int i = 0; i < userManager.numUsers; i++) {
+                    if (userManager.users[i].getUsername() != currentUser.getUsername())
+                        System.out.println((i) + ". " + userManager.users[i].getName());
+                }
+                int removeUser;
+                do {
+                    System.out.println();
+                    System.out.print("Elige el usuario que deseas eliminar: ");
+                    removeUser = input.nextInt();
+                    if (removeUser < 0 || removeUser > (userManager.numUsers - 1)) {
+                        System.out.println();
+                        System.out.println("Usuario no válido.");
+                    }
+                } while (removeUser < 0 || removeUser > (userManager.numUsers - 1));
                 userManager.removeUser(removeUser);
             break;
-            //Mostrar usuarios
+            //Show users
             case 4:
                 if (userManager.isEmpty()) {
                     System.out.println();
@@ -929,7 +939,7 @@ public class GameHub {
                 }
                 userManager.showUsers();
             break;
-            //Buscar usuarios
+            //Search user
             case 5:
                 if (userManager.isEmpty()) {
                     System.out.println();
@@ -942,7 +952,7 @@ public class GameHub {
                     switchSubMenuUser(option());
                 }
             break;
-            //Atrás
+            //Back
             case 6:
             submenu = false;
             break;
@@ -956,7 +966,7 @@ public class GameHub {
     //Switch for submenu searching options
     private void switchSubmenuSearching(int option) {
         switch (option) {
-            //Buscar por videojuego
+            //Search by videogame
             case 1:
                 submenu2 = true;
                 while (submenu2) {
@@ -964,9 +974,11 @@ public class GameHub {
                     switchSubmenuVideogame(option());
                 }
             break;
-            //Buscar por usuario
+            //Search by user
             case 2:
-                userManager.showUsers();
+                for (int i = 0; i < userManager.numUsers; i++) {
+                    System.out.println((i + 1) + ". " + userManager.users[i].getName());
+                }
                 int election = 0;
                 do {
                     System.out.println();
@@ -980,21 +992,21 @@ public class GameHub {
         
                 reviewManager.filterByUser(userManager.users[election - 1]);
             break;
-            //Buscar por valoración
+            //Search by rating
             case 3:
                 System.out.println();
                 System.out.print("Valoración mínima (1 a 5): ");
                 int rating = input.nextInt();
                 reviewManager.filterByRating(rating);
             break;
-            //Buscar por horas jugadas
+            //Search by played hours
             case 4:
                 System.out.println();
                 System.out.print("Introduce un mínimo de horas jugadas: ");
                 double numHoursPlayed = input.nextDouble();
                 reviewManager.filterByPlayedHours(numHoursPlayed);
             break;
-            //Atrás
+            //Back
             case 5:
                 submenu = false;
             break;
@@ -1008,7 +1020,7 @@ public class GameHub {
     //Switch for submenu searching videogame options
     private void switchSubmenuVideogame(int option) {
         switch (option) {
-            //Buscar por nombre
+            //Search by name
             case 1:
                 input.nextLine();   //Clean input buffer
                 System.out.println();
@@ -1016,7 +1028,7 @@ public class GameHub {
                 String name = input.nextLine();
                 videogameManager.filterByName(name);
             break;
-            //Buscar por plataforma
+            //Search by platform
             case 2:
                 System.out.println();
                 System.out.println("Introduce plataforma: ");
@@ -1047,7 +1059,7 @@ public class GameHub {
                     default: System.out.println("Opción inválida.");
                 }
             break;
-            //Buscar por género
+            //Search by gender
             case 3:
                 System.out.println();
                 System.out.println("Introduce género: ");
@@ -1090,7 +1102,7 @@ public class GameHub {
                     default: System.out.println("Opción inválida.");
                 }
             break;
-            //Atrás
+            //Back
             case 4:
                 submenu2 = false;
             break;
@@ -1104,7 +1116,7 @@ public class GameHub {
     //Switch for submenu searching user options
     private void switchSubMenuUser(int option) {
         switch (option) {
-            //Buscar por nombre
+            //Search by name
             case 1:
                 input.nextLine();   //Clean input buffer
                 System.out.println();
@@ -1113,7 +1125,7 @@ public class GameHub {
 
                 userManager.filterByName(name);
             break;
-            //Buscar por apodo
+            //Search by nickname
             case 2:
                 input.nextLine();   //Clean input buffer
                 System.out.println();
@@ -1122,7 +1134,7 @@ public class GameHub {
 
                 userManager.filterByUserName(username);
             break;
-            //Buscar por correo
+            //Search by email
             case 3:
                 input.nextLine();   //Clean input buffer
                 System.out.println();
@@ -1131,11 +1143,11 @@ public class GameHub {
 
                 userManager.filterByMail(mail);
             break;
-            //Buscar por ban
+            //Search by ban
             case 4:
                 userManager.filterByBanned();
             break;
-            //Atrás
+            //Back
             case 5:
                 submenu2 = false;
             break;

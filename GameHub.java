@@ -53,7 +53,7 @@ public class GameHub {
              else if (currentUser.isUserType(User.UserType.USER)) {
 
                 System.out.println();
-                System.out.println("¡Bienvenido, " + currentUser.getName() + "!");
+                System.out.println("¡Bienvenid@, " + currentUser.getName() + "!");
                 System.out.println("Menú para " + currentUser.getType() + ":");
                 
                 while (true) {

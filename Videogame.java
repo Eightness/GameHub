@@ -19,9 +19,11 @@ public class Videogame {
     }
     
     //Class attributes
+    private int maxPlatforms = 5;
+    private int maxGenres = 8;
     private String name;
-    private Platform[] platforms = new Platform[4];
-    private Genre[] genres = new Genre[7];
+    private Platform[] platforms = new Platform[maxPlatforms];
+    private Genre[] genres = new Genre[maxGenres];
     private String releaseDate;
 
     //----------------------------------------------------------------------

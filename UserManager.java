@@ -11,6 +11,8 @@ public class UserManager {
 
     //----------------------------------------------------------------------
 
+    //Constructors
+
     //Empty constructor
     public UserManager() {
 

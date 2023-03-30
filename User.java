@@ -5,6 +5,7 @@
 public class User {
 
     //Enum
+    
     public enum UserType {
         ADMIN, MOD, USER
     }

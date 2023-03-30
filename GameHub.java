@@ -976,6 +976,7 @@ public class GameHub {
             break;
             //Search by user
             case 2:
+                System.out.println();
                 for (int i = 0; i < userManager.numUsers; i++) {
                     System.out.println((i + 1) + ". " + userManager.users[i].getName());
                 }
@@ -984,11 +985,11 @@ public class GameHub {
                     System.out.println();
                     System.out.print("Elige un usuario de la lista: ");
                     election = input.nextInt();
-                    if (election < 0 || election > (userManager.numUsers - 1)) {
+                    if (election < 0 || election > userManager.numUsers) {
                         System.out.println();
                         System.out.println("Usuario no válido.");
                     }
-                } while (election < 0 || election > (userManager.numUsers - 1));
+                } while (election < 0 || election > userManager.numUsers);
         
                 reviewManager.filterByUser(userManager.users[election - 1]);
             break;

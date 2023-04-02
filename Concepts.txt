@@ -1,0 +1,42 @@
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Conceptos generales
+
+"POO": Es un paradigma de programación en el que los programas se organizan en objetos que interactúan entre sí. Los objetos encapsulan datos y métodos. 
+Permite una mayor modularidad, reutilización de código y facilidad de mantenimiento del software.
+
+"Encapsulamiento": Es la técnica de ocultar los detalles internos de un objeto o sistema, y proporcionar una interfaz pública clara y definida para su uso externo, 
+con el objetivo de proteger los datos y la funcionalidad del objeto o sistema.
+
+"Abstracción": Es la técnica mediante la cual se construyen modelos simplificados de objetos o sistemas, con el find e representar de manera más clara y 
+manejable la complejidad de la realidad que se desea programar, enfatizando solo en los aspectos relevantes e ignorando los detalles innecesarios.
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Visibilidad y acceso
+
+"Static": Es una palabra clave que se utiliza para indicar que un miembro de una clase o variable es compartido por todas las instancias de la clase y 
+se puede acceder sin la necesidad de instanciar un objeto de la clase.
+
+"Public": Es una palabra clave que indica que el miembro puede ser accedido desde cualquier lugar.
+
+"Private": Es una palabra clave que indica que el miembro de una clase solo puede ser accedido desde dentro de la misma.
+
+"Protected": Es una palabra clave que indica que el miembro puede ser accedido por la clase y sus subclases.
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+//Conceptos técnicos
+
+"Clase": Es una plantilla o modelo que define un conjunto de atributos y métodos comunes a todos los objetos que pertenecen a esa clase. 
+Puede ser vista como un tipo de dato personalizado.
+
+"Objeto": Es una instancia de una clase, que encapsula un conjunto de datos y métodos específicos para ese objeto en particular. 
+Estos datos y métodos pueden ser diferentes a otras instancias de la misma clase.
+
+"Método": Función que está asociada a una clase y se utiliza para acceder y manipular los datos que se encuentran dentro de la misma. 
+Definen el comportamiento de los objetos de la clase.
+
+"Variable": Es un contenedor que almacena un valor o una referencia a un objeto en memoria. Pueden ser de diferentes tipos de datos y pueden variar.
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------
